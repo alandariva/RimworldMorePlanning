@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+    <HugsLib.UpdateFeatureDef Abstract="true" Name="MorePlanningUpdateFeatureBase">
+        <modNameReadable>More Planning</modNameReadable>
+        <modIdentifier>com.github.alandariva.moreplanning</modIdentifier>
+        <linkUrl>https://ludeon.com/forums/index.php?topic=31045.0</linkUrl>
+    </HugsLib.UpdateFeatureDef>
+
+    <HugsLib.UpdateFeatureDef ParentName="MorePlanningUpdateFeatureBase">
+        <defName>MorePlanning_1_1_0</defName>
+        <assemblyVersion>1.1.0</assemblyVersion>
+        <content>Added a new option: &lt;b&gt;if planning designations should be removed&lt;/b&gt; when something is built or deconstructed on top of it.</content>
+    </HugsLib.UpdateFeatureDef>
+</Defs>

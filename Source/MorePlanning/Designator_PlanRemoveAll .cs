@@ -13,7 +13,7 @@ namespace MorePlanning
             this.defaultDesc = "DesignatorPlanRemoveDesc".Translate();
             this.icon = ContentFinder<Texture2D>.Get("UI/PlanToolRemoveAll", true);
             this.soundSucceeded = SoundDefOf.DesignatePlanAdd;
-            this.hotKey = KeyBindingDefOf.Misc8;
+            this.hotKey = KeyBindingDefOf.Misc7;
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 c)

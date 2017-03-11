@@ -12,7 +12,7 @@ namespace MorePlanning
             this.defaultLabel = "MorePlanning.PlanYellow".Translate();
             this.defaultDesc = "MorePlanning.PlanDesc".Translate();
             this.icon = ContentFinder<Texture2D>.Get("UI/PlanToolYellow", true);
-            this.hotKey = KeyBindingDefOf.Misc11;
+            this.hotKey = KeyBindingDefOf.Misc1;
         }
     }
 }

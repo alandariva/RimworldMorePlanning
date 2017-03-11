@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LanguageData>
-  
+
+    <MorePlanning.SettingRemoveIfBuildingDespawned.label>Remove plan after build</MorePlanning.SettingRemoveIfBuildingDespawned.label>
+    <MorePlanning.SettingRemoveIfBuildingDespawned.desc>If planning designations should be removed when something is built or deconstructed on top of it.</MorePlanning.SettingRemoveIfBuildingDespawned.desc>
+
     <MorePlanning.PlanWhite>White</MorePlanning.PlanWhite>
     <MorePlanning.PlanWhiteRemove>Remove White</MorePlanning.PlanWhiteRemove>
-  
+
     <MorePlanning.PlanBlue>Blue</MorePlanning.PlanBlue>
     <MorePlanning.PlanBlueRemove>Remove Blue</MorePlanning.PlanBlueRemove>
-    
+
     <MorePlanning.PlanRed>Red</MorePlanning.PlanRed>
     <MorePlanning.PlanRedRemove>Remove Red</MorePlanning.PlanRedRemove>
-    
+
     <MorePlanning.PlanYellow>Yellow</MorePlanning.PlanYellow>
     <MorePlanning.PlanYellowRemove>Remove Yellow</MorePlanning.PlanYellowRemove>
-    
+
     <MorePlanning.PlanGreen>Green</MorePlanning.PlanGreen>
     <MorePlanning.PlanGreenRemove>Remove Green</MorePlanning.PlanGreenRemove>
-    
+
     <MorePlanning.PlanDesc>Place planning designations. These don't do anything except help you plan future expansions. Hold the [shift] key to override others planning designations.</MorePlanning.PlanDesc>
-    
+
     <MorePlanning.PlanVisibility>Planning Visibility</MorePlanning.PlanVisibility>
     <MorePlanning.PlanVisibilityDesc>Change the planning visibility.</MorePlanning.PlanVisibilityDesc>
-  
+
 </LanguageData>

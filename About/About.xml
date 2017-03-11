@@ -3,12 +3,13 @@
     <name>More Planning</name>
     <author>Alan Dariva</author>
     <targetVersion>0.16.1393</targetVersion>
-    <url>https://github.com/alandariva/RimworldMorePlanning</url>
-    <description>This mod adds more options for planning.
+    <url>https://ludeon.com/forums/index.php?topic=31045.0</url>
+    <description>This mod creates a new option in the "Architect" menu, called "Planning", with more options for planning.
 
 Features:
 - Blue, red, green and yellow planning designations;
 - Show/hide planning designations;
+- An option for control if planning designations should be removed when something is built or deconstructed on top of it.
 - Holding shift you can override others planning designations.
 
 &lt;color=red&gt;This mod requires &lt;b&gt;HugsLib&lt;/b&gt;, it must be installed and loaded above this mod in the load order.&lt;/color&gt;

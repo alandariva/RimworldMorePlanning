@@ -33,7 +33,7 @@ namespace MorePlanning
             this.defaultLabel = "MorePlanning.PlanVisibility".Translate();
             this.defaultDesc = "MorePlanning.PlanVisibilityDesc".Translate();
             this.soundSucceeded = SoundDefOf.DesignatePlanAdd;
-            this.hotKey = KeyBindingDefOf.Misc5;
+            this.hotKey = KeyBindingDefOf.Misc12;
             InitReflection();
         }
 

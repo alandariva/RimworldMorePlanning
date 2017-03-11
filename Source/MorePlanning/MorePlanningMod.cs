@@ -4,6 +4,7 @@ using RimWorld;
 using System.Collections.Generic;
 using Verse;
 using System.Reflection;
+using HugsLib.Settings;
 
 namespace MorePlanning
 {
@@ -20,6 +21,8 @@ namespace MorePlanning
         private static List<PlanningDesignationDef> planDesDefs = new List<PlanningDesignationDef>();
 
         private PlanningDataStore dataStore = null;
+
+        private SettingHandle<bool> removeIfBuildingDespawned;
 
         private MorePlanningMod() : base()
         {
@@ -46,6 +49,24 @@ namespace MorePlanning
         public override void DefsLoaded()
         {
             LoadPlanDesDefs();
+            removeIfBuildingDespawned = Settings.GetHandle<bool>("removeIfBuildingDespawned", "MorePlanning.SettingRemoveIfBuildingDespawned.label".Translate(), "MorePlanning.SettingRemoveIfBuildingDespawned.desc".Translate(), false);
+            UpdatePlanningDefsSetting();
+        }
+
+        private void UpdatePlanningDefsSetting()
+        {
+            var planningDefs = DefDatabase<PlanningDesignationDef>.AllDefs;
+            foreach (var planningDef in planningDefs)
+            {
+                planningDef.removeIfBuildingDespawned = removeIfBuildingDespawned;
+            }
+        }
+
+        public override void SettingsChanged()
+        {
+            base.SettingsChanged();
+
+            UpdatePlanningDefsSetting();
         }
 
         public override void WorldLoaded()
@@ -57,11 +78,7 @@ namespace MorePlanning
         private static void LoadPlanDesDefs()
         {
             planDesDefs.Clear();
-            planDesDefs.Add(DefDatabase<PlanningDesignationDef>.GetNamed("Plan", true));
-            planDesDefs.Add(DefDatabase<PlanningDesignationDef>.GetNamed("PlanBlue", true));
-            planDesDefs.Add(DefDatabase<PlanningDesignationDef>.GetNamed("PlanGreen", true));
-            planDesDefs.Add(DefDatabase<PlanningDesignationDef>.GetNamed("PlanRed", true));
-            planDesDefs.Add(DefDatabase<PlanningDesignationDef>.GetNamed("PlanYellow", true));
+            planDesDefs.AddRange(DefDatabase<PlanningDesignationDef>.AllDefsListForReading);
         }
 
         public void SetPlanningVisibility(bool value)
