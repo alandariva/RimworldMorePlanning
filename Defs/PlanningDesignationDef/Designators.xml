@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Defs>
+
+    <MorePlanning.PlanningDesignationDef>
+        <defName>Plan</defName>
+        <texturePath>Designations/Plan</texturePath>
+        <targetType>Cell</targetType>
+        <removeIfBuildingDespawned>true</removeIfBuildingDespawned>
+    </MorePlanning.PlanningDesignationDef>
+
+    <MorePlanning.PlanningDesignationDef>
+        <defName>PlanBlue</defName>
+        <texturePath>UI/PlanBlue</texturePath>
+        <targetType>Cell</targetType>
+        <removeIfBuildingDespawned>true</removeIfBuildingDespawned>
+    </MorePlanning.PlanningDesignationDef>
+	
+    <MorePlanning.PlanningDesignationDef>
+        <defName>PlanRed</defName>
+        <texturePath>UI/PlanRed</texturePath>
+        <targetType>Cell</targetType>
+        <removeIfBuildingDespawned>true</removeIfBuildingDespawned>
+    </MorePlanning.PlanningDesignationDef>
+	
+    <MorePlanning.PlanningDesignationDef>
+        <defName>PlanYellow</defName>
+        <texturePath>UI/PlanYellow</texturePath>
+        <targetType>Cell</targetType>
+        <removeIfBuildingDespawned>true</removeIfBuildingDespawned>
+    </MorePlanning.PlanningDesignationDef>
+    
+    <MorePlanning.PlanningDesignationDef>
+        <defName>PlanGreen</defName>
+        <texturePath>UI/PlanGreen</texturePath>
+        <targetType>Cell</targetType>
+        <removeIfBuildingDespawned>true</removeIfBuildingDespawned>
+    </MorePlanning.PlanningDesignationDef>
+	
+</Defs>
