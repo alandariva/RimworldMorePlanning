@@ -10,5 +10,7 @@ Features:
 - Blue, red, green and yellow planning designations;
 - Show/hide planning designations;
 - Holding shift you can override others planning designations.
+
+&lt;color=red&gt;This mod requires &lt;b&gt;HugsLib&lt;/b&gt;, it must be installed and loaded above this mod in the load order.&lt;/color&gt;
 	</description>
 </ModMetaData>
