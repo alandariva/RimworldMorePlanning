@@ -6,6 +6,7 @@
         <texturePath>Designations/Plan</texturePath>
         <targetType>Cell</targetType>
         <removeIfBuildingDespawned>false</removeIfBuildingDespawned>
+        <designateCancelable>false</designateCancelable>
     </MorePlanning.PlanningDesignationDef>
 
     <MorePlanning.PlanningDesignationDef>
@@ -13,6 +14,7 @@
         <texturePath>UI/PlanBlue</texturePath>
         <targetType>Cell</targetType>
         <removeIfBuildingDespawned>false</removeIfBuildingDespawned>
+        <designateCancelable>false</designateCancelable>
     </MorePlanning.PlanningDesignationDef>
 
     <MorePlanning.PlanningDesignationDef>
@@ -20,6 +22,7 @@
         <texturePath>UI/PlanRed</texturePath>
         <targetType>Cell</targetType>
         <removeIfBuildingDespawned>false</removeIfBuildingDespawned>
+        <designateCancelable>false</designateCancelable>
     </MorePlanning.PlanningDesignationDef>
 
     <MorePlanning.PlanningDesignationDef>
@@ -27,6 +30,7 @@
         <texturePath>UI/PlanYellow</texturePath>
         <targetType>Cell</targetType>
         <removeIfBuildingDespawned>false</removeIfBuildingDespawned>
+        <designateCancelable>false</designateCancelable>
     </MorePlanning.PlanningDesignationDef>
 
     <MorePlanning.PlanningDesignationDef>
@@ -34,6 +38,7 @@
         <texturePath>UI/PlanGreen</texturePath>
         <targetType>Cell</targetType>
         <removeIfBuildingDespawned>false</removeIfBuildingDespawned>
+        <designateCancelable>false</designateCancelable>
     </MorePlanning.PlanningDesignationDef>
 
 </Defs>
