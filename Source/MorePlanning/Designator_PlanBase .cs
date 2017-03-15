@@ -15,7 +15,6 @@ namespace MorePlanning
         protected PlanningDesignationDef desDef = null;
 
         protected int draggableDimensions = 2;
-        protected bool dragDrawMeasurements = true;
 
         public override int DraggableDimensions
         {
@@ -29,7 +28,7 @@ namespace MorePlanning
         {
             get
             {
-                return false;
+                return true;
             }
         }
 
