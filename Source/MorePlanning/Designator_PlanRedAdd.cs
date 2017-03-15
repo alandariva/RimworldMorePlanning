@@ -7,7 +7,7 @@ namespace MorePlanning
 {
     public class Designator_PlanRedAdd : Designator_PlanBase
     {
-        public Designator_PlanRedAdd() : base(DefDatabase<PlanningDesignationDef>.GetNamed("PlanRed", true), DesignateMode.Add)
+        public Designator_PlanRedAdd() : base(PlanningDesignationDef.ColorRed, DesignateMode.Add)
         {
             this.defaultLabel = "MorePlanning.PlanRed".Translate();
             this.defaultDesc = "MorePlanning.PlanDesc".Translate();

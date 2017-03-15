@@ -7,7 +7,7 @@ namespace MorePlanning
 {
     public class Designator_PlanRemoveAll : Designator_PlanBase
     {
-        public Designator_PlanRemoveAll() : base(null, DesignateMode.Add)
+        public Designator_PlanRemoveAll() : base(-1, DesignateMode.Add)
         {
             this.defaultLabel = "DesignatorPlanRemove".Translate();
             this.defaultDesc = "DesignatorPlanRemoveDesc".Translate();

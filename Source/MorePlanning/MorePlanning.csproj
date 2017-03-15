@@ -56,11 +56,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Designator_Opacity.cs" />
+    <Compile Include="Designator_PlanShape.cs" />
     <Compile Include="Designator_PlanningVisibility.cs" />
-    <Compile Include="Designator_PlanWhiteAdd.cs" />
-    <Compile Include="Designator_PlanWhiteRemove .cs" />
+    <Compile Include="Designator_PlanGrayAdd.cs" />
+    <Compile Include="Designator_PlanGrayRemove .cs" />
+    <Compile Include="DialogSelectThing.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="MorePlanningMod.cs" />
+    <Compile Include="PlanDesignation.cs" />
+    <Compile Include="OLDPlanningDesignatorDef.cs" />
     <Compile Include="PlanningDesignatorDef.cs" />
     <Compile Include="Designator_PlanBase .cs" />
     <Compile Include="Designator_PlanRemoveAll .cs" />

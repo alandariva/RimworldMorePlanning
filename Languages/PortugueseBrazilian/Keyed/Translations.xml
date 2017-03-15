@@ -4,8 +4,8 @@
     <MorePlanning.SettingRemoveIfBuildingDespawned.label>Remover plano após construir</MorePlanning.SettingRemoveIfBuildingDespawned.label>
     <MorePlanning.SettingRemoveIfBuildingDespawned.desc>Se deve ser removido os desenhos de planejamento quando algo é construido ou desconstruido em cima dele.</MorePlanning.SettingRemoveIfBuildingDespawned.desc>
 
-    <MorePlanning.PlanWhite>Branco</MorePlanning.PlanWhite>
-    <MorePlanning.PlanWhiteRemove>Remove Branco</MorePlanning.PlanWhiteRemove>
+    <MorePlanning.PlanGray>Cinza</MorePlanning.PlanGray>
+    <MorePlanning.PlanGrayRemove>Remove Cinza</MorePlanning.PlanGrayRemove>
 
     <MorePlanning.PlanBlue>Azul</MorePlanning.PlanBlue>
     <MorePlanning.PlanBlueRemove>Remove Azul</MorePlanning.PlanBlueRemove>
@@ -25,5 +25,10 @@
     <MorePlanning.PlanVisibilityDesc>Altera a visibilidade dos planos.</MorePlanning.PlanVisibilityDesc>
 
     <Planning.label>Planejamento</Planning.label>
+
+    <MorePlanning.Opacity.label>Opacidade</MorePlanning.Opacity.label>
+    <MorePlanning.Opacity.desc>Altera a opacidade dos planos</MorePlanning.Opacity.desc>
+
+    <MorePlanning.DefaultOpacity>(Padrão)</MorePlanning.DefaultOpacity>
 
 </LanguageData>

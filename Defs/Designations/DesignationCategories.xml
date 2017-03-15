@@ -8,18 +8,19 @@
         <order>950</order>
         <specialDesignatorClasses>
             <li>MorePlanning.Designator_PlanningVisibility</li>
+            <li>MorePlanning.Designator_Opacity</li>
             <li>MorePlanning.Designator_PlanRemoveAll</li>
-            <li>MorePlanning.Designator_PlanWhiteAdd</li>      
-            <li>MorePlanning.Designator_PlanWhiteRemove</li>
-            <li>MorePlanning.Designator_PlanBlueAdd</li>      
+            <li>MorePlanning.Designator_PlanGrayAdd</li>
+            <li>MorePlanning.Designator_PlanGrayRemove</li>
+            <li>MorePlanning.Designator_PlanBlueAdd</li>
             <li>MorePlanning.Designator_PlanBlueRemove</li>
-            <li>MorePlanning.Designator_PlanRedAdd</li>      
+            <li>MorePlanning.Designator_PlanRedAdd</li>
             <li>MorePlanning.Designator_PlanRedRemove</li>
-            <li>MorePlanning.Designator_PlanGreenAdd</li>      
+            <li>MorePlanning.Designator_PlanGreenAdd</li>
             <li>MorePlanning.Designator_PlanGreenRemove</li>
-            <li>MorePlanning.Designator_PlanYellowAdd</li>      
+            <li>MorePlanning.Designator_PlanYellowAdd</li>
             <li>MorePlanning.Designator_PlanYellowRemove</li>
         </specialDesignatorClasses>
     </DesignationCategoryDef>
-    
+
 </Defs>

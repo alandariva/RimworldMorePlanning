@@ -12,8 +12,6 @@ namespace MorePlanning
     {
         private static bool planningVisibility = true;
 
-        private static FieldInfo resolvedDesignatorsInfo = null;
-
         public static bool PlanningVisibility
         {
             get
@@ -34,30 +32,17 @@ namespace MorePlanning
             this.defaultDesc = "MorePlanning.PlanVisibilityDesc".Translate();
             this.soundSucceeded = SoundDefOf.DesignatePlanAdd;
             this.hotKey = KeyBindingDefOf.Misc12;
-            InitReflection();
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 loc)
         {
-            return false;
-        }
-
-        public override void DesignateSingleCell(IntVec3 c)
-        {
-            return;
+            MorePlanningMod.LogError(GetType().Name + " can't designate cells");
+            return AcceptanceReport.WasRejected;
         }
 
         public static void UpdateIconTool()
         {
-            var planningCategory = DefDatabase<DesignationCategoryDef>.GetNamed("Planning");
-
-            if (planningCategory == null)
-            {
-                Log.Message("Não deu de primeira");
-                return;
-            }
-
-            List<Designator> list = (List<Designator>) resolvedDesignatorsInfo.GetValue(planningCategory);
+            List<Designator> list = MorePlanningMod.GetPlanningDesignators();
 
             foreach (Designator des in list)
             {
@@ -73,12 +58,6 @@ namespace MorePlanning
                     }
                 }
             }
-        }
-
-        private static void InitReflection()
-        {
-            FieldInfo field = typeof(DesignationCategoryDef).GetField("resolvedDesignators", BindingFlags.Instance | BindingFlags.NonPublic);
-            resolvedDesignatorsInfo = field;
         }
 
         public override void ProcessInput(Event ev)

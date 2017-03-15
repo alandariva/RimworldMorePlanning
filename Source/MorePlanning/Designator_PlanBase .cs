@@ -2,20 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using Verse;
+using System;
+using System.Reflection;
 
 namespace MorePlanning
 {
     public abstract class Designator_PlanBase : Designator
     {
+        protected int color;
         protected DesignateMode mode;
 
-        protected DesignationDef desDef = null;
+        protected PlanningDesignationDef desDef = null;
+
+        protected int draggableDimensions = 2;
+        protected bool dragDrawMeasurements = true;
 
         public override int DraggableDimensions
         {
             get
             {
-                return 2;
+                return draggableDimensions;
             }
         }
 
@@ -23,17 +29,18 @@ namespace MorePlanning
         {
             get
             {
-                return true;
+                return false;
             }
         }
 
-        public Designator_PlanBase(DesignationDef desDef, DesignateMode mode)
+        public Designator_PlanBase(int color, DesignateMode mode)
         {
             this.mode = mode;
             this.soundDragSustain = SoundDefOf.DesignateDragStandard;
             this.soundDragChanged = SoundDefOf.DesignateDragStandardChanged;
             this.useMouseIcon = true;
-            this.desDef = desDef;
+            this.desDef = DefDatabase<PlanningDesignationDef>.GetNamed("Plan", true);
+            this.color = color;
 
             if (DesignateMode.Add == mode)
             {
@@ -82,12 +89,7 @@ namespace MorePlanning
             }
             if (this.mode == DesignateMode.Add)
             {
-                if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
-                    && base.Map.designationManager.DesignationAt(c, this.desDef) == null)
-                {
-                    return true;
-                }
-                else
+                if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) == false)
                 {
                     if (HasAnyPlanDesignationAt(c))
                     {
@@ -95,11 +97,17 @@ namespace MorePlanning
                     }
                 }
             }
-            else if (this.mode == DesignateMode.Remove && base.Map.designationManager.DesignationAt(c, this.desDef) == null)
+            else if (this.mode == DesignateMode.Remove && HasThisPlanAt(c, this.desDef) == false)
             {
                 return false;
             }
             return true;
+        }
+
+        private bool HasThisPlanAt(IntVec3 c, DesignationDef desDef)
+        {
+            var desig = base.Map.designationManager.DesignationAt(c, this.desDef) as PlanDesignation;
+            return desig != null && desig.color == this.color;
         }
 
         public override void DesignateSingleCell(IntVec3 c)
@@ -107,7 +115,7 @@ namespace MorePlanning
             if (this.mode == DesignateMode.Add)
             {
                 RemoveAllPlanDesignationAt(c);
-                base.Map.designationManager.AddDesignation(new Designation(c, this.desDef));
+                base.Map.designationManager.AddDesignation(new PlanDesignation(c, this.desDef, this.color));
             }
             else if (this.mode == DesignateMode.Remove)
             {
