@@ -105,8 +105,12 @@ namespace MorePlanning
 
         private bool HasThisPlanAt(IntVec3 c, DesignationDef desDef)
         {
-            var desig = base.Map.designationManager.DesignationAt(c, this.desDef) as PlanDesignation;
-            return desig != null && desig.color == this.color;
+            var desig = base.Map.designationManager.DesignationAt(c, this.desDef);
+            if (desig is PlanDesignation)
+            {
+                return (desig as PlanDesignation).color == this.color;
+            }
+            return desig != null && this.color == PlanningDesignationDef.ColorGray;
         }
 
         public override void DesignateSingleCell(IntVec3 c)
