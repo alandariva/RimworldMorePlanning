@@ -4,7 +4,7 @@
     <author>Alan Dariva</author>
     <targetVersion>0.16.1393</targetVersion>
     <url>https://ludeon.com/forums/index.php?topic=31045.0</url>
-    <description>Version 1.2.2
+    <description>Version 1.2.3
 
 This mod creates a new option in the "Architect" menu, called "Planning", with more options for planning.
 
@@ -15,6 +15,6 @@ Features:
 - An option for control if planning designations should be removed when something is built or deconstructed on top of it.
 - Holding shift you can override others planning designations.
 
-&lt;color=red&gt;This mod requires &lt;b&gt;HugsLib&lt;/b&gt;, it must be installed and loaded above this mod in the load order.&lt;/color&gt;
+&lt;color=red&gt;This mod uses HugsLib (need to be installed and loaded before More Planning) and Harmony (comes with the mod, no need to be installed).&lt;/color&gt;
 	</description>
 </ModMetaData>
