@@ -11,5 +11,8 @@ More Planning is a RimWorld mod that creates a new option in the "Architect" men
 ## Features
 - Blue, red, green and yellow planning designations;
 - Show/hide planning designations;
+- Control planning opacity;
 - An option for control if planning designations should be removed when something is built or deconstructed on top of it.
 - Holding shift you can override others planning designations.
+
+**This mod uses HugsLib (need to be installed and loaded before More Planning) and Harmony (comes with the mod, no need to be installed)**
