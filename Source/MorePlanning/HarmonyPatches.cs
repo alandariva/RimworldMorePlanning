@@ -38,20 +38,7 @@ namespace MorePlanning
                 colorId = (__instance as PlanDesignation).color;
             }
 
-            if (__instance.target.HasThing && !__instance.target.Thing.Spawned)
-            {
-                return false;
-            }
-            Vector3 position = default(Vector3);
-            if (__instance.target.HasThing)
-            {
-                position = __instance.target.Thing.DrawPos;
-                position.y = __instance.DesignationDrawAltitude;
-            }
-            else
-            {
-                position = __instance.target.Cell.ToVector3ShiftedWithAltitude(__instance.DesignationDrawAltitude);
-            }
+            Vector3 position = position = __instance.target.Cell.ToVector3ShiftedWithAltitude(__instance.DesignationDrawAltitude);
             Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, (__instance.def as PlanningDesignationDef).iconMatColor[colorId], 0);
 
             return false;
