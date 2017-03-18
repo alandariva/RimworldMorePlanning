@@ -56,27 +56,27 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Designator_Opacity.cs" />
-    <Compile Include="Designator_PlanShape.cs" />
-    <Compile Include="Designator_PlanningVisibility.cs" />
-    <Compile Include="Designator_PlanGrayAdd.cs" />
-    <Compile Include="Designator_PlanGrayRemove .cs" />
+    <Compile Include="Designators\Designator_Opacity.cs" />
+    <Compile Include="Designators\Designator_PlanBase .cs" />
+    <Compile Include="Designators\Designator_PlanBlueAdd.cs" />
+    <Compile Include="Designators\Designator_PlanBlueRemove.cs" />
+    <Compile Include="Designators\Designator_PlanGrayAdd.cs" />
+    <Compile Include="Designators\Designator_PlanGrayRemove .cs" />
+    <Compile Include="Designators\Designator_PlanGreenAdd.cs" />
+    <Compile Include="Designators\Designator_PlanGreenRemove.cs" />
+    <Compile Include="Designators\Designator_PlanningVisibility.cs" />
+    <Compile Include="Designators\Designator_PlanRedAdd.cs" />
+    <Compile Include="Designators\Designator_PlanRedRemove.cs" />
+    <Compile Include="Designators\Designator_PlanRemoveAll .cs" />
+    <Compile Include="Designators\Designator_PlanShape.cs" />
+    <Compile Include="Designators\Designator_PlanYellowAdd.cs" />
+    <Compile Include="Designators\Designator_PlanYellowRemove.cs" />
     <Compile Include="DialogSelectThing.cs" />
     <Compile Include="HarmonyPatches.cs" />
+    <Compile Include="Migrations\OLDPlanningDesignatorDef.cs" />
     <Compile Include="MorePlanningMod.cs" />
     <Compile Include="PlanDesignation.cs" />
-    <Compile Include="OLDPlanningDesignatorDef.cs" />
     <Compile Include="PlanningDesignatorDef.cs" />
-    <Compile Include="Designator_PlanBase .cs" />
-    <Compile Include="Designator_PlanRemoveAll .cs" />
-    <Compile Include="Designator_PlanBlueRemove.cs" />
-    <Compile Include="Designator_PlanBlueAdd.cs" />
-    <Compile Include="Designator_PlanGreenAdd.cs" />
-    <Compile Include="Designator_PlanGreenRemove.cs" />
-    <Compile Include="Designator_PlanRedAdd.cs" />
-    <Compile Include="Designator_PlanRedRemove.cs" />
-    <Compile Include="Designator_PlanYellowAdd.cs" />
-    <Compile Include="Designator_PlanYellowRemove.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
