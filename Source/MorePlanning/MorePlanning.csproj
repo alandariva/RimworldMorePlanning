@@ -62,6 +62,7 @@
     <Compile Include="Designators\Designator_PlanBlueAdd.cs" />
     <Compile Include="Designators\Designator_PlanBlueRemove.cs" />
     <Compile Include="Designators\Designator_PlanCopy.cs" />
+    <Compile Include="Designators\Designator_PlanCut.cs" />
     <Compile Include="Designators\Designator_PlanGrayAdd.cs" />
     <Compile Include="Designators\Designator_PlanGrayRemove .cs" />
     <Compile Include="Designators\Designator_PlanGreenAdd.cs" />

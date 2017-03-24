@@ -31,4 +31,13 @@
 
     <MorePlanning.DefaultOpacity>(Padrão)</MorePlanning.DefaultOpacity>
 
+    <MorePlanning.PlanCopy>Copia planos</MorePlanning.PlanCopy>
+    <MorePlanning.PlanCopyDesc>Copia os planos na área selecionada.</MorePlanning.PlanCopyDesc>
+
+    <MorePlanning.PlanCut>Recorta planos</MorePlanning.PlanCut>
+    <MorePlanning.PlanCutDesc>Recorta os planos na área selecionada.</MorePlanning.PlanCutDesc>
+
+    <MorePlanning.PlanPaste>Cola planos</MorePlanning.PlanPaste>
+    <MorePlanning.PlanPasteDesc>Cola os planos copiados ou recortados.</MorePlanning.PlanPasteDesc>
+
 </LanguageData>
