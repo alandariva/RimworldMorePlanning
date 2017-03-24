@@ -9,6 +9,8 @@
         <specialDesignatorClasses>
             <li>MorePlanning.Designator_PlanningVisibility</li>
             <li>MorePlanning.Designator_Opacity</li>
+            <li>MorePlanning.Designator_PlanCopy</li>
+            <li>MorePlanning.Designator_PlanPaste</li>
             <li>MorePlanning.Designator_PlanRemoveAll</li>
             <li>MorePlanning.Designator_PlanGrayAdd</li>
             <li>MorePlanning.Designator_PlanGrayRemove</li>

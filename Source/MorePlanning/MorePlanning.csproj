@@ -56,15 +56,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Designators\Designator_Base .cs" />
     <Compile Include="Designators\Designator_Opacity.cs" />
     <Compile Include="Designators\Designator_PlanBase .cs" />
     <Compile Include="Designators\Designator_PlanBlueAdd.cs" />
     <Compile Include="Designators\Designator_PlanBlueRemove.cs" />
+    <Compile Include="Designators\Designator_PlanCopy.cs" />
     <Compile Include="Designators\Designator_PlanGrayAdd.cs" />
     <Compile Include="Designators\Designator_PlanGrayRemove .cs" />
     <Compile Include="Designators\Designator_PlanGreenAdd.cs" />
     <Compile Include="Designators\Designator_PlanGreenRemove.cs" />
     <Compile Include="Designators\Designator_PlanningVisibility.cs" />
+    <Compile Include="Designators\Designator_PlanPaste.cs" />
     <Compile Include="Designators\Designator_PlanRedAdd.cs" />
     <Compile Include="Designators\Designator_PlanRedRemove.cs" />
     <Compile Include="Designators\Designator_PlanRemoveAll .cs" />
@@ -74,10 +77,16 @@
     <Compile Include="DialogSelectThing.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="Migrations\OLDPlanningDesignatorDef.cs" />
+    <Compile Include="MissingPlanningDesignationsException.cs" />
     <Compile Include="MorePlanningMod.cs" />
     <Compile Include="PlanDesignation.cs" />
+    <Compile Include="PlanDesignationInfo.cs" />
+    <Compile Include="PlanInfo.cs" />
     <Compile Include="PlanningDesignatorDef.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Utils_Menu.cs" />
+    <Compile Include="Utils\Utils_Migrate.cs" />
+    <Compile Include="Utils\Utils_Plan.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />

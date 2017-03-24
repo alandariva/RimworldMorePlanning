@@ -26,7 +26,7 @@ namespace MorePlanning
             {
                 return "TooCloseToMapEdge".Translate();
             }
-            if (!HasAnyPlanDesignationAt(c))
+            if (!Utils_Plan.HasAnyPlanDesignationAt(c, this.Map))
             {
                 return false;
             }
@@ -35,7 +35,7 @@ namespace MorePlanning
 
         public override void DesignateSingleCell(IntVec3 c)
         {
-            RemoveAllPlanDesignationAt(c);
+            Utils_Plan.RemoveAllPlanDesignationAt(c, this.Map);
         }
     }
 }

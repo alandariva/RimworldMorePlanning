@@ -15,7 +15,6 @@ namespace MorePlanning
         private MorePlanningMod()
         {
             instance = this;
-            InitReflection();
         }
 
         private static MorePlanningMod instance = null;
@@ -38,8 +37,6 @@ namespace MorePlanning
         private PlanningDataStore dataStore = null;
 
         private SettingHandle<bool> removeIfBuildingDespawned;
-
-        private static FieldInfo resolvedDesignatorsInfo = null;
 
         private SettingHandle<int> planOpacity;
         public int PlanOpacity
@@ -73,19 +70,6 @@ namespace MorePlanning
                 }
                 return planDesDefs;
             }
-        }
-
-        internal static List<Designator> GetPlanningDesignators()
-        {
-            var planningCategory = DefDatabase<DesignationCategoryDef>.GetNamed("Planning");
-
-            if (planningCategory == null)
-            {
-                MorePlanningMod.LogError("menu planning not found");
-                return null;
-            }
-
-            return (List<Designator>)resolvedDesignatorsInfo.GetValue(planningCategory);
         }
 
         public override string ModIdentifier
@@ -157,32 +141,7 @@ namespace MorePlanning
 
         public override void MapLoaded(Map map)
         {
-            // Migrate old designations
-            var oldDesignations = map.designationManager.allDesignations.FindAll(d => d.def is OLDPlanningDesignationDef);
-
-            foreach (var oldDesignation in oldDesignations)
-            {
-                int color = 0;
-                switch (oldDesignation.def.defName)
-                {
-                    case "PlanBlue":
-                        color = PlanningDesignationDef.ColorBlue;
-                        break;
-                    case "PlanRed":
-                        color = PlanningDesignationDef.ColorRed;
-                        break;
-                    case "PlanGreen":
-                        color = PlanningDesignationDef.ColorGreen;
-                        break;
-                    case "PlanYellow":
-                        color = PlanningDesignationDef.ColorYellow;
-                        break;
-                }
-                var newDesignation = new PlanDesignation(oldDesignation.target, DesignationDefOf.Plan, color);
-                map.designationManager.allDesignations.Add(newDesignation);
-                newDesignation.designationManager = map.designationManager;
-                oldDesignation.Delete();
-            }
+            Utils_Migrate.MigrateOldDesignation(map);
         }
 
         private class PlanningDataStore : HugsLib.Utils.UtilityWorldObject
@@ -202,10 +161,5 @@ namespace MorePlanning
             }
         }
 
-        private static void InitReflection()
-        {
-            FieldInfo field = typeof(DesignationCategoryDef).GetField("resolvedDesignators", BindingFlags.Instance | BindingFlags.NonPublic);
-            resolvedDesignatorsInfo = field;
-        }
     }
 }

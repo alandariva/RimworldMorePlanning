@@ -42,21 +42,15 @@ namespace MorePlanning
 
         public static void UpdateIconTool()
         {
-            List<Designator> list = MorePlanningMod.GetPlanningDesignators();
+            var desPlanningVisibility = Utils_Menu.GetPlanningDesignator<Designator_PlanningVisibility>();
 
-            foreach (Designator des in list)
+            if (planningVisibility)
             {
-                if (des is Designator_PlanningVisibility)
-                {
-                    if (planningVisibility)
-                    {
-                        des.icon = ContentFinder<Texture2D>.Get("UI/PlanVisible", true);
-                    }
-                    else
-                    {
-                        des.icon = ContentFinder<Texture2D>.Get("UI/PlanInvisible", true);
-                    }
-                }
+                desPlanningVisibility.icon = ContentFinder<Texture2D>.Get("UI/PlanVisible", true);
+            }
+            else
+            {
+                desPlanningVisibility.icon = ContentFinder<Texture2D>.Get("UI/PlanInvisible", true);
             }
         }
 

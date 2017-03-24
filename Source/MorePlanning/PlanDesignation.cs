@@ -19,13 +19,6 @@ namespace MorePlanning
         public PlanDesignation()
         {
         }
-
-        /*
-        public new void ExposeData()
-        {
-            base.ExposeData();
-            Scribe_Values.LookValue<int>(ref this.color, "Color", 0, true);
-        }
-        */
+        
     }
 }

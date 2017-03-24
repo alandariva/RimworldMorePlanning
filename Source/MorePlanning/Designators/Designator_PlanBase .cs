@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace MorePlanning
 {
-    public abstract class Designator_PlanBase : Designator
+    public abstract class Designator_PlanBase : Designator_Base
     {
         protected int color;
         protected DesignateMode mode;
@@ -35,9 +35,6 @@ namespace MorePlanning
         public Designator_PlanBase(int color, DesignateMode mode)
         {
             this.mode = mode;
-            this.soundDragSustain = SoundDefOf.DesignateDragStandard;
-            this.soundDragChanged = SoundDefOf.DesignateDragStandardChanged;
-            this.useMouseIcon = true;
             this.desDef = DefDatabase<PlanningDesignationDef>.GetNamed("Plan", true);
             this.color = color;
 
@@ -49,31 +46,6 @@ namespace MorePlanning
             {
                 this.soundSucceeded = SoundDefOf.DesignatePlanRemove;
             }
-        }
-
-        protected void RemoveAllPlanDesignationAt(IntVec3 c)
-        {
-            foreach (DesignationDef def in MorePlanningMod.PlanDesDefs)
-            {
-                Designation desAt = base.Map.designationManager.DesignationAt(c, def);
-                if (desAt != null)
-                {
-                    desAt.Delete();
-                }
-            }
-        }
-
-        protected bool HasAnyPlanDesignationAt(IntVec3 c)
-        {
-            foreach (DesignationDef def in MorePlanningMod.PlanDesDefs)
-            {
-                if (base.Map.designationManager.DesignationAt(c, def) != null)
-                {
-                    return true;
-                }
-            }
-
-            return false;
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
@@ -90,7 +62,7 @@ namespace MorePlanning
             {
                 if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) == false)
                 {
-                    if (HasAnyPlanDesignationAt(c))
+                    if (Utils_Plan.HasAnyPlanDesignationAt(c, this.Map))
                     {
                         return false;
                     }
@@ -117,7 +89,7 @@ namespace MorePlanning
         {
             if (this.mode == DesignateMode.Add)
             {
-                RemoveAllPlanDesignationAt(c);
+                Utils_Plan.RemoveAllPlanDesignationAt(c, this.Map);
                 base.Map.designationManager.AddDesignation(new PlanDesignation(c, this.desDef, this.color));
             }
             else if (this.mode == DesignateMode.Remove)

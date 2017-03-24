@@ -33,15 +33,8 @@ namespace MorePlanning
 
         public static void UpdateLabel()
         {
-            List<Designator> list = MorePlanningMod.GetPlanningDesignators();
-
-            foreach (Designator des in list)
-            {
-                if (des is Designator_Opacity)
-                {
-                    des.defaultLabel = "MorePlanning.Opacity.label".Translate(opacity);
-                }
-            }
+            var desOpacity = Utils_Menu.GetPlanningDesignator<Designator_Opacity>();
+            desOpacity.defaultLabel = "MorePlanning.Opacity.label".Translate(opacity);
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 loc)
