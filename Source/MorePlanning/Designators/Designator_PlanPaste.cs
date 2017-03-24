@@ -133,5 +133,16 @@ namespace MorePlanning
             }
         }
 
+        public override void ProcessInput(Event ev)
+        {
+            if (CurrentPlanCopy == null)
+            {
+                Messages.Message("MorePlanning.NoCutCopiedPlan".Translate(), MessageSound.RejectInput);
+                return;
+            }
+
+            base.ProcessInput(ev);
+        }
+
     }
 }
