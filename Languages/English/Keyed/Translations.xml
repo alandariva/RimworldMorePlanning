@@ -42,4 +42,6 @@
 
     <MorePlanning.NoCutCopiedPlan>No planning designations were cut or copied yet.</MorePlanning.NoCutCopiedPlan>
 
+    <MorePlanning.MissingPlanningDesignations>No planning designations were found in the selection.</MorePlanning.MissingPlanningDesignations>
+
 </LanguageData>
