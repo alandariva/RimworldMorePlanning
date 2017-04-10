@@ -1,2 +1,2 @@
-npm install
-grunt setup
+call npm install
+call grunt setup
