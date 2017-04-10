@@ -20,3 +20,5 @@ nbproject
 Source/MorePlanning/Library/*.dll
 
 Assemblies/MorePlanning.dll
+
+node_modules

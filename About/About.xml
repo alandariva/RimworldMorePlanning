@@ -1,10 +1,10 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <ModMetaData>
     <name>More Planning</name>
     <author>Alan Dariva</author>
     <targetVersion>0.16.1393</targetVersion>
     <url>https://ludeon.com/forums/index.php?topic=31045.0</url>
-    <description>Version 1.3.0
+    <description>Version @@version
 
 This mod creates a new option in the "Architect" menu, called "Planning", with more options for planning.
 
