@@ -1,7 +1,7 @@
 const fse = require('fs-extra');
 const glob = require('glob');
 
-const DIST_DIR = 'MorePlanningDist';
+const DIST_DIR = 'MorePlanning';
 
 module.exports = (grunt) => {
     "use strict";
