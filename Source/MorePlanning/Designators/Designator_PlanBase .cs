@@ -54,12 +54,13 @@ namespace MorePlanning
             {
                 return false;
             }
-            if (c.InNoBuildEdgeArea(base.Map))
-            {
-                return "TooCloseToMapEdge".Translate();
-            }
             if (this.mode == DesignateMode.Add)
             {
+                if (c.InNoBuildEdgeArea(base.Map))
+                {
+                    return "TooCloseToMapEdge".Translate();
+                }
+
                 if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) == false)
                 {
                     if (Utils_Plan.HasAnyPlanDesignationAt(c, this.Map))

@@ -22,10 +22,6 @@ namespace MorePlanning
             {
                 return false;
             }
-            if (c.InNoBuildEdgeArea(base.Map))
-            {
-                return "TooCloseToMapEdge".Translate();
-            }
             if (!Utils_Plan.HasAnyPlanDesignationAt(c, this.Map))
             {
                 return false;
