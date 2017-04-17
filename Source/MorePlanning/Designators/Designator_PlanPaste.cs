@@ -59,7 +59,7 @@ namespace MorePlanning
                 if (CurrentPlanCopy != null)
                 {
                     IntVec3 intVec = UI.MouseCell();
-                    CurrentPlanCopy.Draw(intVec);
+                    CurrentPlanCopy.Draw(intVec, this.Map);
                 }
             }
         }

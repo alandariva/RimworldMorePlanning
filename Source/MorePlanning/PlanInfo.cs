@@ -27,7 +27,7 @@ namespace MorePlanning
             this.size = new IntVec2(right - left + 1, top - bottom + 1);
         }
 
-        public void Draw(IntVec3 intVec)
+        public void Draw(IntVec3 intVec, Map map)
         {
             List<IntVec3> cells = new List<IntVec3>();
 
@@ -35,6 +35,12 @@ namespace MorePlanning
             foreach (var planDesInfo in planDesignationInfo)
             {
                 IntVec3 pos = planDesInfo.Pos + intVec;
+
+                if (pos.InNoBuildEdgeArea(map))
+                {
+                    continue;
+                }
+
                 Vector3 position = pos.ToVector3ShiftedWithAltitude(Altitudes.AltitudeFor(AltitudeLayer.MetaOverlays));
                 Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, planDef.iconMatColor[planDesInfo.Color], 0);
                 cells.Add(pos);
@@ -49,6 +55,12 @@ namespace MorePlanning
             foreach (var planDesInfo in planDesignationInfo)
             {
                 IntVec3 pos = planDesInfo.Pos + c;
+
+                if (pos.InNoBuildEdgeArea(map))
+                {
+                    continue;
+                }
+
                 Utils_Plan.RemoveAllPlanDesignationAt(pos, map);
                 map.designationManager.AddDesignation(new PlanDesignation(pos, planDef, planDesInfo.Color));
             }
