@@ -31,9 +31,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="0Harmony, Version=1.0.8.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\Assemblies\0Harmony.dll</HintPath>
+    <Reference Include="0Harmony">
+      <HintPath>Library\0Harmony.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="Assembly-CSharp">
@@ -72,12 +71,9 @@
     <Compile Include="Designators\Designator_PlanRedAdd.cs" />
     <Compile Include="Designators\Designator_PlanRedRemove.cs" />
     <Compile Include="Designators\Designator_PlanRemoveAll .cs" />
-    <Compile Include="Designators\Designator_PlanShape.cs" />
     <Compile Include="Designators\Designator_PlanYellowAdd.cs" />
     <Compile Include="Designators\Designator_PlanYellowRemove.cs" />
-    <Compile Include="DialogSelectThing.cs" />
     <Compile Include="HarmonyPatches.cs" />
-    <Compile Include="Migrations\OLDPlanningDesignatorDef.cs" />
     <Compile Include="MissingPlanningDesignationsException.cs" />
     <Compile Include="MorePlanningMod.cs" />
     <Compile Include="PlanDesignation.cs" />
@@ -85,8 +81,8 @@
     <Compile Include="PlanInfo.cs" />
     <Compile Include="PlanningDesignatorDef.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Resources.cs" />
     <Compile Include="Utils\Utils_Menu.cs" />
-    <Compile Include="Utils\Utils_Migrate.cs" />
     <Compile Include="Utils\Utils_Plan.cs" />
   </ItemGroup>
   <ItemGroup>

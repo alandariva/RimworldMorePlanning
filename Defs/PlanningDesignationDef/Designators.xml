@@ -9,29 +9,4 @@
         <designateCancelable>false</designateCancelable>
     </MorePlanning.PlanningDesignationDef>
 
-    <!-- BEGIN: Compability with old versions of MorePlanning -->
-    <MorePlanning.OLDPlanningDesignationDef Name="OldMorePlanningPlan" Abstract="True">
-        <texturePath>UI/PlanOld</texturePath>
-        <targetType>Cell</targetType>
-        <removeIfBuildingDespawned>false</removeIfBuildingDespawned>
-        <designateCancelable>false</designateCancelable>
-    </MorePlanning.OLDPlanningDesignationDef>
-
-    <MorePlanning.OLDPlanningDesignationDef ParentName="OldMorePlanningPlan">
-        <defName>PlanBlue</defName>
-    </MorePlanning.OLDPlanningDesignationDef>
-
-    <MorePlanning.OLDPlanningDesignationDef ParentName="OldMorePlanningPlan">
-        <defName>PlanRed</defName>
-    </MorePlanning.OLDPlanningDesignationDef>
-
-    <MorePlanning.OLDPlanningDesignationDef ParentName="OldMorePlanningPlan">
-        <defName>PlanGreen</defName>
-    </MorePlanning.OLDPlanningDesignationDef>
-
-    <MorePlanning.OLDPlanningDesignationDef ParentName="OldMorePlanningPlan">
-        <defName>PlanYellow</defName>
-    </MorePlanning.OLDPlanningDesignationDef>
-    <!-- END: Compability with old versions of MorePlanning -->
-
 </Defs>

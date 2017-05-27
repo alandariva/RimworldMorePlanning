@@ -48,10 +48,16 @@ module.exports = (grunt) => {
             fse.copySync('../../RimWorldWin_Data/Managed/Assembly-CSharp.dll', 'Source/MorePlanning/Library/Assembly-CSharp.dll');
             fse.copySync('../../RimWorldWin_Data/Managed/UnityEngine.dll', 'Source/MorePlanning/Library/UnityEngine.dll');
 
-            // Copy hugslib dll from workshop folder
+            // Copy HugsLib.dll from workshop folder
             let filesFound = glob.sync('../../../../workshop/content/**/HugsLib.dll');
             if (filesFound.length > 0) {
                 fse.copySync(filesFound[0], 'Source/MorePlanning/Library/HugsLib.dll');
+            }
+			
+			// Copy 0Harmony.dll from workshop folder
+            filesFound = glob.sync('../../../../workshop/content/**/0Harmony.dll');
+            if (filesFound.length > 0) {
+                fse.copySync(filesFound[0], 'Source/MorePlanning/Library/0Harmony.dll');
             }
         } catch (err) {
             console.error(err);

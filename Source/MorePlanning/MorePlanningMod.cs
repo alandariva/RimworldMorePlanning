@@ -141,7 +141,7 @@ namespace MorePlanning
 
         public override void MapLoaded(Map map)
         {
-            Utils_Migrate.MigrateOldDesignation(map);
+            
         }
 
         private class PlanningDataStore : HugsLib.Utils.UtilityWorldObject
@@ -157,7 +157,7 @@ namespace MorePlanning
             public override void ExposeData()
             {
                 base.ExposeData();
-                Scribe_Values.LookValue<bool>(ref planningVisibility, "planningVisibility", true);
+                Scribe_Values.Look<bool>(ref planningVisibility, "planningVisibility", true);
             }
         }
 

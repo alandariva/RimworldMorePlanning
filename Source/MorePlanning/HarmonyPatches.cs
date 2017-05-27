@@ -53,7 +53,7 @@ namespace MorePlanning
         {
             if (__instance is PlanDesignation)
             {
-                Scribe_Values.LookValue<int>(ref (__instance as PlanDesignation).color, "Color", 0, true);
+                Scribe_Values.Look<int>(ref (__instance as PlanDesignation).color, "Color", 0, true);
             }
             
             return true;

@@ -46,11 +46,11 @@ namespace MorePlanning
 
             if (planningVisibility)
             {
-                desPlanningVisibility.icon = ContentFinder<Texture2D>.Get("UI/PlanVisible", true);
+                desPlanningVisibility.icon = Resources.IconVisible;
             }
             else
             {
-                desPlanningVisibility.icon = ContentFinder<Texture2D>.Get("UI/PlanInvisible", true);
+                desPlanningVisibility.icon = Resources.IconInvisible;
             }
         }
 
