@@ -5,7 +5,7 @@
         <defName>Planning</defName>
         <label>Planning</label>
         <description>More options for planning.</description>
-        <order>950</order>
+        <order>0</order>
         <specialDesignatorClasses>
             <li>MorePlanning.Designator_PlanningVisibility</li>
             <li>MorePlanning.Designator_Opacity</li>
