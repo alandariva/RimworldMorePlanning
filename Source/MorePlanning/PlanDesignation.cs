@@ -7,7 +7,7 @@ using Verse;
 
 namespace MorePlanning
 {
-    class PlanDesignation : Designation
+    public class PlanDesignation : Designation
     {
         public int color = 0;
 

@@ -32,6 +32,8 @@ namespace MorePlanning
 
         public const string Identifier = "com.github.alandariva.moreplanning";
 
+        public int SelectedColor = 0;
+
         private static List<PlanningDesignationDef> planDesDefs = new List<PlanningDesignationDef>();
 
         private PlanningDataStore dataStore = null;
@@ -83,7 +85,22 @@ namespace MorePlanning
             removeIfBuildingDespawned = Settings.GetHandle<bool>("removeIfBuildingDespawned", "MorePlanning.SettingRemoveIfBuildingDespawned.label".Translate(), "MorePlanning.SettingRemoveIfBuildingDespawned.desc".Translate(), false);
             planOpacity = Settings.GetHandle<int>("opacity", "MorePlanning.SettingPlanOpacity.label".Translate(), "MorePlanning.SettingPlanOpacity.desc".Translate(), 25);
             planOpacity.NeverVisible = true;
+            PlanColorManager.Load(Settings);
+
             SettingsChanged();
+
+            DesignationCategoryDef desCatDef = DefDatabase<DesignationCategoryDef>.GetNamed("Planning");
+
+            if (desCatDef == null)
+                throw new Exception("Planning designation category not found");
+
+            FieldInfo _designatorsFI = typeof(DesignationCategoryDef).GetField("resolvedDesignators", BindingFlags.NonPublic | BindingFlags.Instance);
+            var _designators = _designatorsFI.GetValue(desCatDef) as List<Designator>;
+
+            for (int i = 0; i < PlanColorManager.NumPlans; i++)
+            {
+                _designators.Add(new Designator_SelectColor(i));
+            }
         }
 
         public static void LogError(string text)
@@ -110,7 +127,7 @@ namespace MorePlanning
         {
             var planDef = DefDatabase<PlanningDesignationDef>.GetNamed("Plan", true);
 
-            foreach (var mat in planDef.iconMatColor)
+            foreach (var mat in Resources.planMatColor)
             {
                 Color color = mat.color;
                 color.a = planOpacity / 100f;

@@ -93,7 +93,7 @@ namespace MorePlanning
             {
                 var planInfo = new PlanDesignationInfo()
                 {
-                    Color = (planDesignation is PlanDesignation) ? (planDesignation as PlanDesignation).color : PlanningDesignationDef.ColorGray,
+                    Color = (planDesignation is PlanDesignation) ? (planDesignation as PlanDesignation).color : 0,
                     Pos = new IntVec3(planDesignation.target.Cell.x - sizeCompX, planDesignation.target.Cell.y, planDesignation.target.Cell.z - sizeCompZ),
                 };
                 planDesignationInfo.Add(planInfo);

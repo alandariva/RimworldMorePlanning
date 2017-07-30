@@ -42,7 +42,7 @@ namespace MorePlanning
                 }
 
                 Vector3 position = pos.ToVector3ShiftedWithAltitude(Altitudes.AltitudeFor(AltitudeLayer.MetaOverlays));
-                Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, planDef.iconMatColor[planDesInfo.Color], 0);
+                Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, Resources.planMatColor[planDesInfo.Color], 0);
                 cells.Add(pos);
             }
 

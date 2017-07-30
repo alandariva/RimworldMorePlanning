@@ -39,7 +39,7 @@ namespace MorePlanning
             }
 
             Vector3 position = position = __instance.target.Cell.ToVector3ShiftedWithAltitude(__instance.DesignationDrawAltitude);
-            Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, (__instance.def as PlanningDesignationDef).iconMatColor[colorId], 0);
+            Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, Resources.planMatColor[colorId], 0);
 
             return false;
         }

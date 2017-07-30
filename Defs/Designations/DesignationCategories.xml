@@ -12,17 +12,8 @@
             <li>MorePlanning.Designator_PlanCut</li>
             <li>MorePlanning.Designator_PlanCopy</li>
             <li>MorePlanning.Designator_PlanPaste</li>
-            <li>MorePlanning.Designator_PlanRemoveAll</li>
-            <li>MorePlanning.Designator_PlanGrayAdd</li>
-            <li>MorePlanning.Designator_PlanGrayRemove</li>
-            <li>MorePlanning.Designator_PlanBlueAdd</li>
-            <li>MorePlanning.Designator_PlanBlueRemove</li>
-            <li>MorePlanning.Designator_PlanRedAdd</li>
-            <li>MorePlanning.Designator_PlanRedRemove</li>
-            <li>MorePlanning.Designator_PlanGreenAdd</li>
-            <li>MorePlanning.Designator_PlanGreenRemove</li>
-            <li>MorePlanning.Designator_PlanYellowAdd</li>
-            <li>MorePlanning.Designator_PlanYellowRemove</li>
+			<li>MorePlanning.Designator_PlanAdd</li>
+            <li>MorePlanning.Designator_PlanRemove</li>
         </specialDesignatorClasses>
     </DesignationCategoryDef>
 

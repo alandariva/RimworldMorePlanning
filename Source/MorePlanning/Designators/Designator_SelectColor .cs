@@ -1,116 +1,48 @@
-﻿using RimWorld;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
+using System.Linq;
+using RimWorld;
 using Verse;
-using System;
-using System.Reflection;
+using UnityEngine;
 using Verse.Sound;
+using System;
 
 namespace MorePlanning
 {
-    public abstract class Designator_PlanBase : Designator_Base
+    public class Designator_SelectColor : Designator_Base
     {
-        protected PlanningDesignationDef desDef = null;
+        protected int color = 0;
 
-        protected int draggableDimensions = 2;
-
-        public override int DraggableDimensions
+        public Designator_SelectColor(int color)
         {
-            get
-            {
-                return draggableDimensions;
-            }
+            this.color = color;
+            this.defaultLabel = "" + color;
+            this.defaultDesc = "MorePlanning.PlanDesc".Translate();
         }
 
-        public override bool DragDrawMeasurements
+        public override void ProcessInput(Event ev)
         {
-            get
+            if (ev.button == 1)
             {
-                return true;
-            }
-        }
+                List<FloatMenuOption> list = new List<FloatMenuOption>();
 
-        public Designator_PlanBase()
-        {
-            this.desDef = DefDatabase<PlanningDesignationDef>.GetNamed("Plan", true);
+                list.Add(new FloatMenuOption("MorePlanning.ChangeColor".Translate(), delegate
+                {
+                    Find.WindowStack.Add(new Dialog.ColorSelectorDialog());
+                }, MenuOptionPriority.Default, null, null, 0, null, null));
 
-            /*
-            if (DesignateMode.Add == mode)
-            {
-                this.soundSucceeded = SoundDefOf.DesignatePlanAdd;
+                Find.WindowStack.Add(new FloatMenu(list));
             }
             else
             {
-                this.soundSucceeded = SoundDefOf.DesignatePlanRemove;
-            }
-            */
-        }
+                MorePlanningMod.Instance.SelectedColor = this.color;
 
-        /*
-        public override AcceptanceReport CanDesignateCell(IntVec3 c)
-        {
-            if (!c.InBounds(base.Map))
-            {
-                return false;
-            }
-            if (this.mode == DesignateMode.Add)
-            {
-                if (c.InNoBuildEdgeArea(base.Map))
+                if (Find.DesignatorManager.SelectedDesignator == null)
                 {
-                    return "TooCloseToMapEdge".Translate();
-                }
-
-                if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) == false)
-                {
-                    if (Utils_Plan.HasAnyPlanDesignationAt(c, this.Map))
-                    {
-                        return false;
-                    }
+                    var designatorPlanPaste = Utils_Menu.GetPlanningDesignator<Designator_PlanAdd>();
+                    Find.DesignatorManager.Select(designatorPlanPaste);
                 }
             }
-            else if (this.mode == DesignateMode.Remove && HasThisPlanAt(c, this.desDef) == false)
-            {
-                return false;
-            }
-            return true;
         }
-        */
-
-            /*
-        private bool HasThisPlanAt(IntVec3 c, DesignationDef desDef)
-        {
-            var desig = base.Map.designationManager.DesignationAt(c, this.desDef);
-            if (desig is PlanDesignation)
-            {
-                return (desig as PlanDesignation).color == this.color;
-            }
-            return desig != null && this.color == 0;
-        }
-        */
-
-        /*
-        public override void DesignateSingleCell(IntVec3 c)
-        {
-            if (this.mode == DesignateMode.Add)
-            {
-                Utils_Plan.RemoveAllPlanDesignationAt(c, this.Map);
-                base.Map.designationManager.AddDesignation(new PlanDesignation(c, this.desDef, this.color));
-            }
-            else if (this.mode == DesignateMode.Remove)
-            {
-                base.Map.designationManager.DesignationAt(c, this.desDef).Delete();
-            }
-        }
-        */
-
-        public override void SelectedUpdate()
-        {
-            GenUI.RenderMouseoverBracket();
-            GenDraw.DrawNoBuildEdgeLines();
-            Designator_PlanningVisibility.PlanningVisibility = true;
-        }
-
-        protected abstract void CustomGizmoOnGUI(Vector2 topLeft, Rect rect);
 
         // copy paste from Command.GizmoOnGUI
         public override GizmoResult GizmoOnGUI(Vector2 topLeft)
@@ -133,7 +65,34 @@ namespace MorePlanning
             // BEGIN EDIT
             //Widgets.DrawTextureFitted(new Rect(rect), badTex, this.iconDrawScale * 0.85f, this.iconProportions, this.iconTexCoords);
 
-            this.CustomGizmoOnGUI(topLeft, rect);
+            {
+                Rect position = new Rect(0f, 0f, this.iconProportions.x, this.iconProportions.y);
+                float num;
+                if (position.width / position.height < rect.width / rect.height)
+                {
+                    num = rect.height / position.height;
+                }
+                else
+                {
+                    num = rect.width / position.width;
+                }
+                num *= this.iconDrawScale * 0.85f;
+                position.width *= num;
+                position.height *= num;
+                position.x = rect.x + rect.width / 2f - position.width / 2f;
+                position.y = rect.y + rect.height / 2f - position.height / 2f;
+
+                Widgets.DrawBoxSolid(position, PlanColorManager.planColor[this.color]);
+
+                if (MorePlanningMod.Instance.SelectedColor == this.color)
+                {
+                    Widgets.DrawTextureFitted(new Rect(rect), Resources.ToolBoxColorSelected, this.iconDrawScale * 0.85f, this.iconProportions, this.iconTexCoords);
+                }
+                else
+                {
+                    Widgets.DrawTextureFitted(new Rect(rect), Resources.ToolBoxColor, this.iconDrawScale * 0.85f, this.iconProportions, this.iconTexCoords);
+                }
+            }
 
             // END EDIT
             GUI.color = Color.white;
@@ -215,6 +174,5 @@ namespace MorePlanning
                 return new GizmoResult(GizmoState.Clear, null);
             }
         }
-
     }
 }
