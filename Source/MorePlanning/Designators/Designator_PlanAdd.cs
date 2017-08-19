@@ -16,6 +16,7 @@ namespace MorePlanning
             this.defaultDesc = "MorePlanning.PlanDesc".Translate();
 
             this.soundSucceeded = SoundDefOf.DesignatePlanAdd;
+            this.hotKey = KeyBindingDefOf.DesignatorCancel;
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 c)

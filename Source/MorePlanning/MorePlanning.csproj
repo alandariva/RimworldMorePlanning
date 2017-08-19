@@ -65,10 +65,11 @@
     <Compile Include="Designators\Designator_PlanAdd.cs" />
     <Compile Include="Designators\Designator_PlanPaste.cs" />
     <Compile Include="Designators\Designator_PlanRemove .cs" />
-    <Compile Include="Dialog\ColorSelectorDialog.cs" />
+    <Compile Include="Dialog\Dialog_ColorSelector.cs" />
     <Compile Include="HarmonyPatches.cs" />
     <Compile Include="MissingPlanningDesignationsException.cs" />
     <Compile Include="MorePlanningMod.cs" />
+    <Compile Include="PlanColor.cs" />
     <Compile Include="PlanDesignation.cs" />
     <Compile Include="PlanColorManager.cs" />
     <Compile Include="PlanDesignationInfo.cs" />

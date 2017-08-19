@@ -1,7 +1,7 @@
 {
   "name": "moreplanning",
   "description": "More Planning is a RimWorld mod that creates a new option in the \"Architect\" menu, called \"Planning\", with more options for planning.",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

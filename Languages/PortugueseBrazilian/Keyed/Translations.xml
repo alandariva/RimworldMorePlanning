@@ -4,21 +4,6 @@
     <MorePlanning.SettingRemoveIfBuildingDespawned.label>Remover plano após construir</MorePlanning.SettingRemoveIfBuildingDespawned.label>
     <MorePlanning.SettingRemoveIfBuildingDespawned.desc>Se deve ser removido os desenhos de planejamento quando algo é construido ou desconstruido em cima dele.</MorePlanning.SettingRemoveIfBuildingDespawned.desc>
 
-    <MorePlanning.PlanGray>Cinza</MorePlanning.PlanGray>
-    <MorePlanning.PlanGrayRemove>Remove Cinza</MorePlanning.PlanGrayRemove>
-
-    <MorePlanning.PlanBlue>Azul</MorePlanning.PlanBlue>
-    <MorePlanning.PlanBlueRemove>Remove Azul</MorePlanning.PlanBlueRemove>
-
-    <MorePlanning.PlanRed>Vermelho</MorePlanning.PlanRed>
-    <MorePlanning.PlanRedRemove>Remove Vermelho</MorePlanning.PlanRedRemove>
-
-    <MorePlanning.PlanYellow>Amarelo</MorePlanning.PlanYellow>
-    <MorePlanning.PlanYellowRemove>Remove Amarelo</MorePlanning.PlanYellowRemove>
-
-    <MorePlanning.PlanGreen>Verde</MorePlanning.PlanGreen>
-    <MorePlanning.PlanGreenRemove>Remove Verde</MorePlanning.PlanGreenRemove>
-
     <MorePlanning.PlanDesc>Coloca desenhos de planejamento. Estes não tem efeito, apenas ajudam a planejar futuras expansões. Segure a tecla [shift] para sobrepor os outros planos.</MorePlanning.PlanDesc>
 
     <MorePlanning.PlanVisibility>Visibilidade dos Planos</MorePlanning.PlanVisibility>
@@ -43,5 +28,10 @@
     <MorePlanning.NoCutCopiedPlan>Nenhum desenhos de planejamento foram cortados ou copiados ainda.</MorePlanning.NoCutCopiedPlan>
 
     <MorePlanning.MissingPlanningDesignations>Nenhum desenho de planejamento foi encontrado na seleção.</MorePlanning.MissingPlanningDesignations>
+
+    <MorePlanning.DefaultColor>cor padrão</MorePlanning.DefaultColor>
+    <MorePlanning.Ok>ok</MorePlanning.Ok>
+
+    <MorePlanning.ChangeColor>Alterar Cor</MorePlanning.ChangeColor>
 
 </LanguageData>

@@ -17,7 +17,7 @@ namespace MorePlanning
 
         private static SettingHandle<string>[] planColorSetting = new SettingHandle<string>[NumPlans];
 
-        private static string[] defaultColors = new string[NumPlans] {
+        readonly public static string[] defaultColors = new string[NumPlans] {
             "a9a9a9",
             "2095f2",
             "4bae4f",
@@ -44,13 +44,25 @@ namespace MorePlanning
 
             for (int i = 0; i < NumPlans; i++)
             {
-                Color color = new Color();
-                ColorUtility.TryParseHtmlString("#" + planColorSetting[i], out color);
-
-                planColor[i] = color;
-                
-                Resources.planMatColor[i].SetColor("_Color", color);
+                ColorChanged(i);
             }
+        }
+
+        public static void ChangeColor(int colorNum, string hexColor)
+        {
+            planColorSetting[colorNum].Value = hexColor;
+            ColorChanged(colorNum);
+        }
+
+        private static void ColorChanged(int numColor)
+        {
+            Color color = new Color();
+            ColorUtility.TryParseHtmlString("#" + planColorSetting[numColor], out color);
+
+            planColor[numColor] = color;
+
+            color.a = MorePlanningMod.Instance.PlanOpacity / 100f;
+            Resources.planMatColor[numColor].SetColor("_Color", color);
         }
     }
 }

@@ -21,26 +21,23 @@ namespace MorePlanning
 
         public override void ProcessInput(Event ev)
         {
-            if (ev.button == 1)
+            // Show change color option
+            List<FloatMenuOption> list = new List<FloatMenuOption>();
+
+            list.Add(new FloatMenuOption("MorePlanning.ChangeColor".Translate(), delegate
             {
-                List<FloatMenuOption> list = new List<FloatMenuOption>();
+                Find.WindowStack.Add(new Dialog.Dialog_ColorSelector(color));
+            }, MenuOptionPriority.Default, null, null, 0, null, null));
 
-                list.Add(new FloatMenuOption("MorePlanning.ChangeColor".Translate(), delegate
-                {
-                    Find.WindowStack.Add(new Dialog.ColorSelectorDialog());
-                }, MenuOptionPriority.Default, null, null, 0, null, null));
+            Find.WindowStack.Add(new FloatMenu(list));
 
-                Find.WindowStack.Add(new FloatMenu(list));
-            }
-            else
+            // Select color
+            MorePlanningMod.Instance.SelectedColor = this.color;
+
+            if (Find.DesignatorManager.SelectedDesignator == null)
             {
-                MorePlanningMod.Instance.SelectedColor = this.color;
-
-                if (Find.DesignatorManager.SelectedDesignator == null)
-                {
-                    var designatorPlanPaste = Utils_Menu.GetPlanningDesignator<Designator_PlanAdd>();
-                    Find.DesignatorManager.Select(designatorPlanPaste);
-                }
+                var designatorPlanPaste = Utils_Menu.GetPlanningDesignator<Designator_PlanAdd>();
+                Find.DesignatorManager.Select(designatorPlanPaste);
             }
         }
 

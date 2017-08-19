@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.IO;
+using UnityEngine;
 using Verse;
 
 namespace MorePlanning
@@ -16,6 +17,11 @@ namespace MorePlanning
 
         public static readonly Texture2D RemoveIcon = ContentFinder<Texture2D>.Get("UI/RemoveIcon", true);
         public static readonly Texture2D PlanToolRemoveAll = ContentFinder<Texture2D>.Get("UI/PlanToolRemoveAll", true);
+
+        public static readonly Texture2D ColorPickerSelect = ContentFinder<Texture2D>.Get("UI/ColorPickerSelect", true);
+
+        public static readonly Texture2D ColorPickerOverlay = ContentFinder<Texture2D>.Get("UI/ColorPickerOverlay", true);
+        public static readonly Texture2D HsvSlider = ContentFinder<Texture2D>.Get("UI/HsvSlider", true);
 
         public static Material[] planMatColor = new Material[PlanColorManager.NumPlans];
 
