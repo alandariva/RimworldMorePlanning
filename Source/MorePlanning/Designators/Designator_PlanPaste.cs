@@ -137,7 +137,7 @@ namespace MorePlanning
         {
             if (CurrentPlanCopy == null)
             {
-                Messages.Message("MorePlanning.NoCutCopiedPlan".Translate(), MessageSound.RejectInput);
+                Messages.Message("MorePlanning.NoCutCopiedPlan".Translate(), MessageTypeDefOf.RejectInput);
                 return;
             }
 

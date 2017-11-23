@@ -131,7 +131,7 @@ namespace MorePlanning
             MouseoverSounds.DoRegion(rect, SoundDefOf.MouseoverCommand);
             GUI.color = this.IconDrawColor;
             // BEGIN EDIT
-            //Widgets.DrawTextureFitted(new Rect(rect), badTex, this.iconDrawScale * 0.85f, this.iconProportions, this.iconTexCoords);
+            //Widgets.DrawTextureFitted(rect, badTex, this.iconDrawScale * 0.85f, this.iconProportions, this.iconTexCoords, this.iconAngle);
 
             this.CustomGizmoOnGUI(topLeft, rect);
 
@@ -194,7 +194,7 @@ namespace MorePlanning
                 {
                     if (!this.disabledReason.NullOrEmpty())
                     {
-                        Messages.Message(this.disabledReason, MessageSound.RejectInput);
+                        Messages.Message(this.disabledReason, MessageTypeDefOf.RejectInput);
                     }
                     return new GizmoResult(GizmoState.Mouseover, null);
                 }
@@ -215,6 +215,5 @@ namespace MorePlanning
                 return new GizmoResult(GizmoState.Clear, null);
             }
         }
-
     }
 }

@@ -53,7 +53,7 @@ namespace MorePlanning
 
             if (planDesignations.Count == 0)
             {
-                Messages.Message("MorePlanning.MissingPlanningDesignations".Translate(), MessageSound.RejectInput);
+                Messages.Message("MorePlanning.MissingPlanningDesignations".Translate(), MessageTypeDefOf.RejectInput);
                 return;
             }
 
