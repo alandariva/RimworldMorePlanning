@@ -1,17 +1,14 @@
-﻿using System;
-using HugsLib;
-using RimWorld;
-using System.Collections.Generic;
-using Verse;
-using System.Reflection;
-using HugsLib.Settings;
+﻿using MorePlanning.Common;
+using MorePlanning.Plan;
 using UnityEngine;
+using Verse;
+using Resources = MorePlanning.Common.Resources;
 
-namespace MorePlanning.Dialog
+namespace MorePlanning.Dialogs
 {
-    public class Dialog_ColorSelector : Window
+    public class ColorSelectorDialog : Window
     {
-        protected PlanColor color;
+        protected AdaptableColor color;
 
         protected string inputColorHex;
 
@@ -34,10 +31,10 @@ namespace MorePlanning.Dialog
             }
         }
 
-        public Dialog_ColorSelector(int numColor)
+        public ColorSelectorDialog(int numColor)
         {
             this.numColor = numColor;
-            this.color = new PlanColor(PlanColorManager.planColor[numColor]);
+            this.color = new AdaptableColor(PlanColorManager.planColor[numColor]);
 
             this.inputColorHex = this.color.HexColor;
             this.slider = this.color.H;
@@ -47,7 +44,6 @@ namespace MorePlanning.Dialog
             this.hexColorBefore = this.inputColorHex;
             this.forcePause = true;
             this.doCloseX = true;
-            this.closeOnEscapeKey = true;
             this.absorbInputAroundWindow = true;
             this.closeOnClickedOutside = true;
         }

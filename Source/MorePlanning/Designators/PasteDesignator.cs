@@ -4,14 +4,16 @@ using RimWorld;
 using Verse;
 using UnityEngine;
 using Verse.Sound;
+using MorePlanning.Designators;
+using MorePlanning.Plan;
 
-namespace MorePlanning
+namespace MorePlanning.Designators
 {
-    public class Designator_PlanPaste : Designator_Base
+    public class PasteDesignator : BaseDesignator
     {
         protected static float middleMouseDownTime;
 
-        public static PlanInfo CurrentPlanCopy { get; set; }
+        public static PlanInfoSet CurrentPlanCopy { get; set; }
 
         public override int DraggableDimensions
         {
@@ -29,7 +31,7 @@ namespace MorePlanning
             }
         }
 
-        public Designator_PlanPaste()
+        public PasteDesignator()
         {
             this.defaultLabel = "MorePlanning.PlanPaste".Translate();
             this.defaultDesc = "MorePlanning.PlanPasteDesc".Translate();
@@ -80,7 +82,7 @@ namespace MorePlanning
                     rotationDirection = RotationDirection.Counterclockwise;
                     Event.current.Use();
                 }
-                Widgets.Label(rect, KeyBindingDefOf.DesignatorRotateLeft.MainKeyLabel);
+                Widgets.Label(rect, KeyBindingDefOf.Designator_RotateLeft.MainKeyLabel);
                 Rect rect2 = new Rect(winRect.width / 2f + 5f, 15f, 64f, 64f);
                 if (Widgets.ButtonImage(rect2, TexUI.RotRightTex))
                 {
@@ -88,7 +90,7 @@ namespace MorePlanning
                     rotationDirection = RotationDirection.Clockwise;
                     Event.current.Use();
                 }
-                Widgets.Label(rect2, KeyBindingDefOf.DesignatorRotateRight.MainKeyLabel);
+                Widgets.Label(rect2, KeyBindingDefOf.Designator_RotateRight.MainKeyLabel);
                 if (rotationDirection != RotationDirection.None)
                 {
                     CurrentPlanCopy.Rotate(rotationDirection);
@@ -113,11 +115,11 @@ namespace MorePlanning
                     rotationDirection = RotationDirection.Clockwise;
                 }
             }
-            if (KeyBindingDefOf.DesignatorRotateRight.KeyDownEvent)
+            if (KeyBindingDefOf.Designator_RotateRight.KeyDownEvent)
             {
                 rotationDirection = RotationDirection.Clockwise;
             }
-            if (KeyBindingDefOf.DesignatorRotateLeft.KeyDownEvent)
+            if (KeyBindingDefOf.Designator_RotateLeft.KeyDownEvent)
             {
                 rotationDirection = RotationDirection.Counterclockwise;
             }

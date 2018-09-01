@@ -1,8 +1,8 @@
-﻿using System.IO;
+﻿using MorePlanning.Plan;
 using UnityEngine;
 using Verse;
 
-namespace MorePlanning
+namespace MorePlanning.Common
 {
     [StaticConstructorOnStartup]
     class Resources

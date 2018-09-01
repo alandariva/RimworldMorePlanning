@@ -1,22 +1,21 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using MorePlanning.Plan;
+using MorePlanning.Utility;
 using RimWorld;
 using Verse;
 using UnityEngine;
-using Verse.Sound;
-using System;
+using Resources = MorePlanning.Common.Resources;
 
-namespace MorePlanning
+namespace MorePlanning.Designators
 {
-    public class Designator_PlanAdd : Designator_PlanBase
+    public class AddDesignator : PlanBaseDesignator
     {
-        public Designator_PlanAdd() : base()
+        public AddDesignator() : base()
         {
             this.defaultLabel = "DesignatorPlan".Translate();
             this.defaultDesc = "MorePlanning.PlanDesc".Translate();
 
-            this.soundSucceeded = SoundDefOf.DesignatePlanAdd;
-            this.hotKey = KeyBindingDefOf.DesignatorCancel;
+            this.soundSucceeded = SoundDefOf.Designate_PlanAdd;
+            this.hotKey = KeyBindingDefOf.Designator_Cancel;
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
@@ -31,7 +30,7 @@ namespace MorePlanning
             }
             if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) == false)
             {
-                if (Utils_Plan.HasAnyPlanDesignationAt(c, this.Map))
+                if (MapUtility.HasAnyPlanDesignationAt(c, this.Map))
                 {
                     return false;
                 }
@@ -41,7 +40,7 @@ namespace MorePlanning
 
         public override void DesignateSingleCell(IntVec3 c)
         {
-            Utils_Plan.RemoveAllPlanDesignationAt(c, this.Map);
+            MapUtility.RemoveAllPlanDesignationAt(c, this.Map);
             base.Map.designationManager.AddDesignation(new PlanDesignation(c, this.desDef, MorePlanningMod.Instance.SelectedColor));
         }
 

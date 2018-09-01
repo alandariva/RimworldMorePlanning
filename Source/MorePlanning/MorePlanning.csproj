@@ -55,33 +55,33 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Designators\Designator_Base .cs" />
-    <Compile Include="Designators\Designator_Opacity.cs" />
-    <Compile Include="Designators\Designator_SelectColor .cs" />
-    <Compile Include="Designators\Designator_PlanBase .cs" />
-    <Compile Include="Designators\Designator_PlanCopy.cs" />
-    <Compile Include="Designators\Designator_PlanCut.cs" />
-    <Compile Include="Designators\Designator_PlanningVisibility.cs" />
-    <Compile Include="Designators\Designator_PlanAdd.cs" />
-    <Compile Include="Designators\Designator_PlanPaste.cs" />
-    <Compile Include="Designators\Designator_PlanRemove .cs" />
-    <Compile Include="Dialog\Dialog_ColorSelector.cs" />
-    <Compile Include="HarmonyPatches.cs" />
-    <Compile Include="MissingPlanningDesignationsException.cs" />
+    <Compile Include="Designators\BaseDesignator.cs" />
+    <Compile Include="Designators\OpacityDesignator.cs" />
+    <Compile Include="Designators\SelectColorDesignator.cs" />
+    <Compile Include="Designators\PlanBaseDesignator.cs" />
+    <Compile Include="Designators\CopyDesignator.cs" />
+    <Compile Include="Designators\CutDesignator.cs" />
+    <Compile Include="Designators\VisibilityDesignator.cs" />
+    <Compile Include="Designators\AddDesignator.cs" />
+    <Compile Include="Designators\PasteDesignator.cs" />
+    <Compile Include="Designators\RemoveDesignator.cs" />
+    <Compile Include="Dialogs\ColorSelectorDialog.cs" />
+    <Compile Include="Common\HarmonyPatches.cs" />
     <Compile Include="MorePlanningMod.cs" />
-    <Compile Include="PlanColor.cs" />
-    <Compile Include="PlanDesignation.cs" />
-    <Compile Include="PlanColorManager.cs" />
-    <Compile Include="PlanDesignationInfo.cs" />
-    <Compile Include="PlanInfo.cs" />
-    <Compile Include="PlanningDesignatorDef.cs" />
+    <Compile Include="Common\AdaptableColor.cs" />
+    <Compile Include="Plan\PlanDesignation.cs" />
+    <Compile Include="Plan\PlanColorManager.cs" />
+    <Compile Include="Plan\PlanInfo.cs" />
+    <Compile Include="Plan\PlanInfoSet.cs" />
+    <Compile Include="Plan\PlanDesignationDef.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Resources.cs" />
-    <Compile Include="Utils\Utils_Menu.cs" />
-    <Compile Include="Utils\Utils_Plan.cs" />
+    <Compile Include="Common\Resources.cs" />
+    <Compile Include="Utility\MenuUtility.cs" />
+    <Compile Include="Utility\MapUtility.cs" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,12 +1,11 @@
-﻿using RimWorld;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using MorePlanning.Utility;
 using UnityEngine;
 using Verse;
-using System;
 
-namespace MorePlanning
+namespace MorePlanning.Designators
 {
-    public class Designator_Opacity : Designator
+    public class OpacityDesignator : Designator
     {
         private static int opacity = 0;
 
@@ -24,7 +23,7 @@ namespace MorePlanning
             }
         }
 
-        public Designator_Opacity()
+        public OpacityDesignator()
         {
             this.defaultLabel = "MorePlanning.Opacity.label".Translate(0);
             this.defaultDesc = "MorePlanning.Opacity.desc".Translate();
@@ -33,7 +32,7 @@ namespace MorePlanning
 
         public static void UpdateLabel()
         {
-            var desOpacity = Utils_Menu.GetPlanningDesignator<Designator_Opacity>();
+            var desOpacity = MenuUtility.GetPlanningDesignator<OpacityDesignator>();
             desOpacity.defaultLabel = "MorePlanning.Opacity.label".Translate(opacity);
         }
 

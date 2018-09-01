@@ -1,21 +1,25 @@
 ﻿using RimWorld;
 using System;
+using MorePlanning.Designators;
+using MorePlanning.Plan;
+using MorePlanning.Utility;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
+using Resources = MorePlanning.Common.Resources;
 
-namespace MorePlanning
+namespace MorePlanning.Designators
 {
-    public class Designator_PlanRemove : Designator_PlanBase
+    public class RemoveDesignator : PlanBaseDesignator
     {
 
-        public Designator_PlanRemove()
+        public RemoveDesignator()
         {
             this.defaultLabel = "DesignatorPlanRemove".Translate();
             this.defaultDesc = "DesignatorPlanRemoveDesc".Translate();
 
-            this.soundSucceeded = SoundDefOf.DesignatePlanRemove;
-            this.hotKey = KeyBindingDefOf.DesignatorDeconstruct;
+            this.soundSucceeded = SoundDefOf.Designate_PlanRemove;
+            this.hotKey = KeyBindingDefOf.Designator_Deconstruct;
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
@@ -27,15 +31,15 @@ namespace MorePlanning
 
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
-                return Utils_Plan.HasAnyPlanDesignationAt(c, this.Map);
+                return MapUtility.HasAnyPlanDesignationAt(c, this.Map);
             }
 
-            return Utils_Plan.HasPlanDesignationAt(c, this.Map, MorePlanningMod.Instance.SelectedColor);
+            return MapUtility.HasPlanDesignationAt(c, this.Map, MorePlanningMod.Instance.SelectedColor);
         }
 
         public override void DesignateSingleCell(IntVec3 c)
         {
-            Utils_Plan.RemoveAllPlanDesignationAt(c, this.Map);
+            MapUtility.RemoveAllPlanDesignationAt(c, this.Map);
         }
 
         public override void DrawMouseAttachments()

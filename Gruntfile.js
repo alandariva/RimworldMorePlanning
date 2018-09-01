@@ -45,8 +45,8 @@ module.exports = (grunt) => {
     grunt.registerTask('setup', () => {
         try {
             // Copy default dlls for modding from game folder
-            fse.copySync('../../RimWorldWin_Data/Managed/Assembly-CSharp.dll', 'Source/MorePlanning/Library/Assembly-CSharp.dll');
-            fse.copySync('../../RimWorldWin_Data/Managed/UnityEngine.dll', 'Source/MorePlanning/Library/UnityEngine.dll');
+            fse.copySync('../../RimWorldWin64_Data/Managed/Assembly-CSharp.dll', 'Source/MorePlanning/Library/Assembly-CSharp.dll');
+            fse.copySync('../../RimWorldWin64_Data/Managed/UnityEngine.dll', 'Source/MorePlanning/Library/UnityEngine.dll');
 
             // Copy HugsLib.dll from workshop folder
             let filesFound = glob.sync('../../../../workshop/content/**/HugsLib.dll');

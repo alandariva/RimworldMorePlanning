@@ -11,6 +11,7 @@ Desktop.ini
 **/bin
 **/obj
 **/.vs
+**/.idea
 
 # Windows shortcuts
 *.lnk

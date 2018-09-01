@@ -1,13 +1,8 @@
-﻿using System;
-using HugsLib;
-using RimWorld;
-using System.Collections.Generic;
-using Verse;
-using System.Reflection;
-using HugsLib.Settings;
+﻿using HugsLib.Settings;
 using UnityEngine;
+using Resources = MorePlanning.Common.Resources;
 
-namespace MorePlanning
+namespace MorePlanning.Plan
 {
     public class PlanColorManager
     {

@@ -1,14 +1,13 @@
-﻿using RimWorld;
-using System;
-using System.Collections.Generic;
-using System.Reflection;
+﻿using MorePlanning.Utility;
+using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
+using Resources = MorePlanning.Common.Resources;
 
-namespace MorePlanning
+namespace MorePlanning.Designators
 {
-    public class Designator_PlanningVisibility : Designator
+    public class VisibilityDesignator : Designator
     {
         private static bool planningVisibility = true;
 
@@ -26,11 +25,11 @@ namespace MorePlanning
             }
         }
 
-        public Designator_PlanningVisibility()
+        public VisibilityDesignator()
         {
             this.defaultLabel = "MorePlanning.PlanVisibility".Translate();
             this.defaultDesc = "MorePlanning.PlanVisibilityDesc".Translate();
-            this.soundSucceeded = SoundDefOf.DesignatePlanAdd;
+            this.soundSucceeded = SoundDefOf.Designate_PlanAdd;
             this.hotKey = KeyBindingDefOf.Misc12;
         }
 
@@ -42,7 +41,7 @@ namespace MorePlanning
 
         public static void UpdateIconTool()
         {
-            var desPlanningVisibility = Utils_Menu.GetPlanningDesignator<Designator_PlanningVisibility>();
+            var desPlanningVisibility = MenuUtility.GetPlanningDesignator<VisibilityDesignator>();
 
             if (planningVisibility)
             {

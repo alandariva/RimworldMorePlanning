@@ -1,25 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using RimWorld;
-using Verse;
-using UnityEngine;
+﻿using UnityEngine;
 
-namespace MorePlanning
+namespace MorePlanning.Common
 {
-    public class PlanColor
+    public class AdaptableColor
     {
         protected string hexColor;
         protected float h, s, v;
         protected float r, g, b, a;
 
-        public PlanColor()
+        public AdaptableColor()
         {
             this.ObjColor = new Color();
         }
 
-        public PlanColor(Color c)
+        public AdaptableColor(Color c)
         {
             this.ObjColor = c;
         }

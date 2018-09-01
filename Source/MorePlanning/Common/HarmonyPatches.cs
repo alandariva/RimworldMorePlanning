@@ -1,9 +1,11 @@
-﻿using Harmony;
-using System.Reflection;
+﻿using System.Reflection;
+using Harmony;
+using MorePlanning.Designators;
+using MorePlanning.Plan;
 using UnityEngine;
 using Verse;
 
-namespace MorePlanning
+namespace MorePlanning.Common
 {
     [StaticConstructorOnStartup]
     public static class HarmonyPatches
@@ -21,12 +23,12 @@ namespace MorePlanning
     {
         static bool Prefix(Designation __instance)
         {
-            if (__instance.def is PlanningDesignationDef == false)
+            if (__instance.def is PlanDesignationDef == false)
             {
                 return true;
             }
 
-            if (Designator_PlanningVisibility.PlanningVisibility == false)
+            if (VisibilityDesignator.PlanningVisibility == false)
             {
                 return false;
             }

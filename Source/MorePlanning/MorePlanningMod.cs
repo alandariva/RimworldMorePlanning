@@ -5,7 +5,10 @@ using System.Collections.Generic;
 using Verse;
 using System.Reflection;
 using HugsLib.Settings;
+using MorePlanning.Designators;
+using MorePlanning.Plan;
 using UnityEngine;
+using Resources = MorePlanning.Common.Resources;
 
 namespace MorePlanning
 {
@@ -34,7 +37,7 @@ namespace MorePlanning
 
         public int SelectedColor = 0;
 
-        private static List<PlanningDesignationDef> planDesDefs = new List<PlanningDesignationDef>();
+        private static List<PlanDesignationDef> planDesDefs = new List<PlanDesignationDef>();
 
         private PlanningDataStore dataStore = null;
 
@@ -62,7 +65,7 @@ namespace MorePlanning
             }
         }
 
-        public static List<PlanningDesignationDef> PlanDesDefs
+        public static List<PlanDesignationDef> PlanDesDefs
         {
             get
             {
@@ -99,7 +102,7 @@ namespace MorePlanning
 
             for (int i = 0; i < PlanColorManager.NumPlans; i++)
             {
-                _designators.Add(new Designator_SelectColor(i));
+                _designators.Add(new SelectColorDesignator(i));
             }
         }
 
@@ -110,7 +113,7 @@ namespace MorePlanning
 
         private void UpdatePlanningDefsSetting()
         {
-            var planningDefs = DefDatabase<PlanningDesignationDef>.AllDefs;
+            var planningDefs = DefDatabase<PlanDesignationDef>.AllDefs;
             foreach (var planningDef in planningDefs)
             {
                 planningDef.removeIfBuildingDespawned = removeIfBuildingDespawned;
@@ -125,7 +128,7 @@ namespace MorePlanning
 
         private void UpdatePlanOpacity()
         {
-            var planDef = DefDatabase<PlanningDesignationDef>.GetNamed("Plan", true);
+            var planDef = DefDatabase<PlanDesignationDef>.GetNamed("Plan", true);
 
             foreach (var mat in Resources.planMatColor)
             {
@@ -138,14 +141,14 @@ namespace MorePlanning
         public override void WorldLoaded()
         {
             dataStore = HugsLib.Utils.UtilityWorldObjectManager.GetUtilityWorldObject<PlanningDataStore>();
-            Designator_PlanningVisibility.PlanningVisibility = dataStore.planningVisibility;
-            Designator_Opacity.Opacity = PlanOpacity;
+            VisibilityDesignator.PlanningVisibility = dataStore.planningVisibility;
+            OpacityDesignator.Opacity = PlanOpacity;
         }
 
         private static void LoadPlanDesDefs()
         {
             planDesDefs.Clear();
-            planDesDefs.AddRange(DefDatabase<PlanningDesignationDef>.AllDefsListForReading);
+            planDesDefs.AddRange(DefDatabase<PlanDesignationDef>.AllDefsListForReading);
         }
 
         public void SetPlanningVisibility(bool value)

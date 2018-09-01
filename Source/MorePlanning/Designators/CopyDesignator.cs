@@ -4,10 +4,13 @@ using RimWorld;
 using Verse;
 using System;
 using UnityEngine;
+using MorePlanning.Designators;
+using MorePlanning.Plan;
+using MorePlanning.Utility;
 
-namespace MorePlanning
+namespace MorePlanning.Designators
 {
-    public class Designator_PlanCopy : Designator_Base
+    public class CopyDesignator : BaseDesignator
     {
 
         public override int DraggableDimensions
@@ -26,7 +29,7 @@ namespace MorePlanning
             }
         }
 
-        public Designator_PlanCopy()
+        public CopyDesignator()
         {
             this.defaultLabel = "MorePlanning.PlanCopy".Translate();
             this.defaultDesc = "MorePlanning.PlanCopyDesc".Translate();
@@ -43,12 +46,17 @@ namespace MorePlanning
             {
                 return "TooCloseToMapEdge".Translate();
             }
-            return Utils_Plan.HasAnyPlanDesignationAt(c, this.Map);
+            return MapUtility.HasAnyPlanDesignationAt(c, this.Map);
+        }
+
+        public override void RenderHighlight(List<IntVec3> dragCells)
+        {
+            DesignatorUtility.RenderHighlightOverSelectableCells(this, dragCells);
         }
 
         public override void DesignateMultiCell(IEnumerable<IntVec3> cells)
         {
-            var planDesignations = cells.Select(cell => Utils_Plan.GetPlanDesignationAt(cell, this.Map)).Where(cell => cell != null).ToList();
+            var planDesignations = cells.Select(cell => MapUtility.GetPlanDesignationAt(cell, this.Map)).Where(cell => cell != null).ToList();
             cells = planDesignations.Select(plan => plan.target.Cell);
 
             if (planDesignations.Count == 0)
@@ -86,12 +94,12 @@ namespace MorePlanning
             int sizeCompX = mousePos.x;
             int sizeCompZ = mousePos.z;
 
-            List<PlanDesignationInfo> planDesignationInfo = new List<PlanDesignationInfo>();
+            List<PlanInfo> planDesignationInfo = new List<PlanInfo>();
 
             // Copy all data from designations
             foreach (var planDesignation in planDesignations)
             {
-                var planInfo = new PlanDesignationInfo()
+                var planInfo = new PlanInfo()
                 {
                     Color = (planDesignation is PlanDesignation) ? (planDesignation as PlanDesignation).color : 0,
                     Pos = new IntVec3(planDesignation.target.Cell.x - sizeCompX, planDesignation.target.Cell.y, planDesignation.target.Cell.z - sizeCompZ),
@@ -99,12 +107,12 @@ namespace MorePlanning
                 planDesignationInfo.Add(planInfo);
             }
 
-            var planCopy = new PlanInfo(planDesignationInfo);
+            var planCopy = new PlanInfoSet(planDesignationInfo);
 
-            Designator_PlanPaste.CurrentPlanCopy = planCopy;
+            PasteDesignator.CurrentPlanCopy = planCopy;
             Finalize(true);
 
-            var designatorPlanPaste = Utils_Menu.GetPlanningDesignator<Designator_PlanPaste>();
+            var designatorPlanPaste = MenuUtility.GetPlanningDesignator<PasteDesignator>();
             Find.DesignatorManager.Select(designatorPlanPaste);
         }
 

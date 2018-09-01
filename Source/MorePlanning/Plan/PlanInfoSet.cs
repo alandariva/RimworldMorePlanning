@@ -1,20 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using MorePlanning.Utility;
 using UnityEngine;
 using Verse;
+using Resources = MorePlanning.Common.Resources;
 
-namespace MorePlanning
+namespace MorePlanning.Plan
 {
-    public class PlanInfo
+    public class PlanInfoSet
     {
-        protected List<PlanDesignationInfo> planDesignationInfo;
+        protected List<PlanInfo> planDesignationInfo;
 
         private IntVec2 size;
         public IntVec2 Size { get => size; private set => size = value; }
 
-        public PlanInfo(List<PlanDesignationInfo> planDesignationInfo)
+        public PlanInfoSet(List<PlanInfo> planDesignationInfo)
         {
             this.planDesignationInfo = planDesignationInfo;
 
@@ -31,7 +31,7 @@ namespace MorePlanning
         {
             List<IntVec3> cells = new List<IntVec3>();
 
-            var planDef = DefDatabase<PlanningDesignationDef>.GetNamed("Plan", true);
+            var planDef = DefDatabase<PlanDesignationDef>.GetNamed("Plan", true);
             foreach (var planDesInfo in planDesignationInfo)
             {
                 IntVec3 pos = planDesInfo.Pos + intVec;
@@ -51,7 +51,7 @@ namespace MorePlanning
 
         public void DesignateFromOrigin(IntVec3 c, Map map)
         {
-            var planDef = DefDatabase<PlanningDesignationDef>.GetNamed("Plan", true);
+            var planDef = DefDatabase<PlanDesignationDef>.GetNamed("Plan", true);
             foreach (var planDesInfo in planDesignationInfo)
             {
                 IntVec3 pos = planDesInfo.Pos + c;
@@ -61,7 +61,7 @@ namespace MorePlanning
                     continue;
                 }
 
-                Utils_Plan.RemoveAllPlanDesignationAt(pos, map);
+                MapUtility.RemoveAllPlanDesignationAt(pos, map);
                 map.designationManager.AddDesignation(new PlanDesignation(pos, planDef, planDesInfo.Color));
             }
         }

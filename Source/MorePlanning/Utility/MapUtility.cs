@@ -1,8 +1,9 @@
-﻿using Verse;
+﻿using MorePlanning.Plan;
+using Verse;
 
-namespace MorePlanning
+namespace MorePlanning.Utility
 {
-    public static class Utils_Plan
+    public static class MapUtility
     {
         public static void RemoveAllPlanDesignationAt(IntVec3 c, Map map)
         {

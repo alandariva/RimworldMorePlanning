@@ -1,12 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using RimWorld;
-using Verse;
+﻿using System.Collections.Generic;
 using System.Reflection;
+using Verse;
 
-namespace MorePlanning
+namespace MorePlanning.Utility
 {
-    class Utils_Menu
+    class MenuUtility
     {
 
         private static FieldInfo resolvedDesignatorsInfo = null;
@@ -18,7 +16,7 @@ namespace MorePlanning
 
             if (resolvedDesignatorsInfo == null)
             {
-                MorePlanningMod.LogError("Reflection failed (Utils_Menu::InitReflection, DesignationCategoryDef.resolvedDesignators)");
+                MorePlanningMod.LogError("Reflection failed (MenuUtility::InitReflection, DesignationCategoryDef.resolvedDesignators)");
             }
         }
 
