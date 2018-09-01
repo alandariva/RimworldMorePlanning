@@ -1,13 +1,13 @@
 ﻿using System;
-using HugsLib;
-using RimWorld;
 using System.Collections.Generic;
-using Verse;
 using System.Reflection;
+using HugsLib;
 using HugsLib.Settings;
+using HugsLib.Utils;
 using MorePlanning.Designators;
 using MorePlanning.Plan;
 using UnityEngine;
+using Verse;
 using Resources = MorePlanning.Common.Resources;
 
 namespace MorePlanning
@@ -17,77 +17,58 @@ namespace MorePlanning
     {
         private MorePlanningMod()
         {
-            instance = this;
+            _instance = this;
         }
 
-        private static MorePlanningMod instance = null;
+        private static MorePlanningMod _instance;
         public static MorePlanningMod Instance
         {
-            get
-            {
-                if (instance == null)
-                {
-                    instance = new MorePlanningMod();
-                }
-                return instance;
-            }
+            get { return _instance ?? (_instance = new MorePlanningMod()); }
         }
 
         public const string Identifier = "com.github.alandariva.moreplanning";
 
         public int SelectedColor = 0;
 
-        private static List<PlanDesignationDef> planDesDefs = new List<PlanDesignationDef>();
+        private static List<PlanDesignationDef> _planDesDefs = new List<PlanDesignationDef>();
 
-        private PlanningDataStore dataStore = null;
+        private PlanningDataStore _dataStore;
 
-        private SettingHandle<bool> removeIfBuildingDespawned;
+        private SettingHandle<bool> _removeIfBuildingDespawned;
 
-        private SettingHandle<int> planOpacity;
+        private SettingHandle<int> _planOpacity;
         public int PlanOpacity
         {
-            get
-            {
-                return planOpacity.Value;
-            }
+            get => _planOpacity.Value;
             set
             {
-                planOpacity.Value = value;
+                _planOpacity.Value = value;
                 HugsLibController.SettingsManager.SaveChanges();
             }
         }
 
-        public float DefaultPlanOpacity
-        {
-            get
-            {
-                return planOpacity.DefaultValue;
-            }
-        }
+        public float DefaultPlanOpacity => _planOpacity.DefaultValue;
 
         public static List<PlanDesignationDef> PlanDesDefs
         {
             get
             {
-                if (planDesDefs.Count == 0)
+                if (_planDesDefs.Count == 0)
                 {
                     LoadPlanDesDefs();
                 }
-                return planDesDefs;
+                return _planDesDefs;
             }
         }
 
-        public override string ModIdentifier
-        {
-            get { return MorePlanningMod.Identifier; }
-        }
+        public override string ModIdentifier => Identifier;
 
         public override void DefsLoaded()
         {
             LoadPlanDesDefs();
-            removeIfBuildingDespawned = Settings.GetHandle<bool>("removeIfBuildingDespawned", "MorePlanning.SettingRemoveIfBuildingDespawned.label".Translate(), "MorePlanning.SettingRemoveIfBuildingDespawned.desc".Translate(), false);
-            planOpacity = Settings.GetHandle<int>("opacity", "MorePlanning.SettingPlanOpacity.label".Translate(), "MorePlanning.SettingPlanOpacity.desc".Translate(), 25);
-            planOpacity.NeverVisible = true;
+            _removeIfBuildingDespawned = Settings.GetHandle("removeIfBuildingDespawned", "MorePlanning.SettingRemoveIfBuildingDespawned.label".Translate(), "MorePlanning.SettingRemoveIfBuildingDespawned.desc".Translate(), false);
+            _planOpacity = Settings.GetHandle("opacity", "MorePlanning.SettingPlanOpacity.label".Translate(), "MorePlanning.SettingPlanOpacity.desc".Translate(), 25);
+            _planOpacity.NeverVisible = true;
             PlanColorManager.Load(Settings);
 
             SettingsChanged();
@@ -97,12 +78,12 @@ namespace MorePlanning
             if (desCatDef == null)
                 throw new Exception("Planning designation category not found");
 
-            FieldInfo _designatorsFI = typeof(DesignationCategoryDef).GetField("resolvedDesignators", BindingFlags.NonPublic | BindingFlags.Instance);
-            var _designators = _designatorsFI.GetValue(desCatDef) as List<Designator>;
+            FieldInfo designatorsFi = typeof(DesignationCategoryDef).GetField("resolvedDesignators", BindingFlags.NonPublic | BindingFlags.Instance);
+            var designators = designatorsFi.GetValue(desCatDef) as List<Designator>;
 
             for (int i = 0; i < PlanColorManager.NumPlans; i++)
             {
-                _designators.Add(new SelectColorDesignator(i));
+                designators.Add(new SelectColorDesignator(i));
             }
         }
 
@@ -116,7 +97,7 @@ namespace MorePlanning
             var planningDefs = DefDatabase<PlanDesignationDef>.AllDefs;
             foreach (var planningDef in planningDefs)
             {
-                planningDef.removeIfBuildingDespawned = removeIfBuildingDespawned;
+                planningDef.removeIfBuildingDespawned = _removeIfBuildingDespawned;
             }
         }
 
@@ -128,34 +109,32 @@ namespace MorePlanning
 
         private void UpdatePlanOpacity()
         {
-            var planDef = DefDatabase<PlanDesignationDef>.GetNamed("Plan", true);
-
-            foreach (var mat in Resources.planMatColor)
+            foreach (var mat in Resources.PlanMatColor)
             {
                 Color color = mat.color;
-                color.a = planOpacity / 100f;
+                color.a = _planOpacity / 100f;
                 mat.color = color;
             }
         }
 
         public override void WorldLoaded()
         {
-            dataStore = HugsLib.Utils.UtilityWorldObjectManager.GetUtilityWorldObject<PlanningDataStore>();
-            VisibilityDesignator.PlanningVisibility = dataStore.planningVisibility;
+            _dataStore = UtilityWorldObjectManager.GetUtilityWorldObject<PlanningDataStore>();
+            VisibilityDesignator.PlanningVisibility = _dataStore.PlanningVisibility;
             OpacityDesignator.Opacity = PlanOpacity;
         }
 
         private static void LoadPlanDesDefs()
         {
-            planDesDefs.Clear();
-            planDesDefs.AddRange(DefDatabase<PlanDesignationDef>.AllDefsListForReading);
+            _planDesDefs.Clear();
+            _planDesDefs.AddRange(DefDatabase<PlanDesignationDef>.AllDefsListForReading);
         }
 
         public void SetPlanningVisibility(bool value)
         {
-            if (this.dataStore != null)
+            if (_dataStore != null)
             {
-                this.dataStore.planningVisibility = value;
+                _dataStore.PlanningVisibility = value;
             }
         }
 
@@ -164,20 +143,20 @@ namespace MorePlanning
             
         }
 
-        private class PlanningDataStore : HugsLib.Utils.UtilityWorldObject
+        private class PlanningDataStore : UtilityWorldObject
         {
-            public bool planningVisibility;
+            public bool PlanningVisibility;
 
             public override void PostAdd()
             {
                 base.PostAdd();
-                planningVisibility = true;
+                PlanningVisibility = true;
             }
 
             public override void ExposeData()
             {
                 base.ExposeData();
-                Scribe_Values.Look<bool>(ref planningVisibility, "planningVisibility", true);
+                Scribe_Values.Look(ref PlanningVisibility, "planningVisibility", true);
             }
         }
 

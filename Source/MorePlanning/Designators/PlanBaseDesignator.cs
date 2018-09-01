@@ -1,6 +1,6 @@
-﻿using RimWorld;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using MorePlanning.Plan;
+using RimWorld;
 using UnityEngine;
 using Verse;
 using Verse.Sound;
@@ -9,29 +9,15 @@ namespace MorePlanning.Designators
 {
     public abstract class PlanBaseDesignator : BaseDesignator
     {
-        protected PlanDesignationDef desDef = null;
+        protected PlanDesignationDef DesDef;
 
-        protected int draggableDimensions = 2;
+        public override int DraggableDimensions => 2;
 
-        public override int DraggableDimensions
+        public override bool DragDrawMeasurements => true;
+
+        protected PlanBaseDesignator()
         {
-            get
-            {
-                return draggableDimensions;
-            }
-        }
-
-        public override bool DragDrawMeasurements
-        {
-            get
-            {
-                return true;
-            }
-        }
-
-        public PlanBaseDesignator()
-        {
-            this.desDef = DefDatabase<PlanDesignationDef>.GetNamed("Plan", true);
+            DesDef = DefDatabase<PlanDesignationDef>.GetNamed("Plan");
         }
 
         public override void SelectedUpdate()
@@ -46,7 +32,7 @@ namespace MorePlanning.Designators
             DesignatorUtility.RenderHighlightOverSelectableCells(this, dragCells);
         }
 
-        protected abstract void CustomGizmoOnGUI(Vector2 topLeft, Rect rect);
+        protected abstract void CustomGizmoOnGui(Vector2 topLeft, Rect rect);
 
         // copy paste from Command.GizmoOnGUI
         public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth)
@@ -63,12 +49,12 @@ namespace MorePlanning.Designators
                 }
             }
             Texture2D badTex = icon;
-            if ((UnityEngine.Object)badTex == (UnityEngine.Object)null)
+            if (badTex == null)
             {
                 badTex = BaseContent.BadTex;
             }
             Material material = (!disabled) ? null : TexUI.GrayscaleGUI;
-            GenUI.DrawTextureWithMaterial(rect, BGTex, material, default(Rect));
+            GenUI.DrawTextureWithMaterial(rect, BGTex, material);
             MouseoverSounds.DoRegion(rect, SoundDefOf.Mouseover_Command);
             Rect outerRect = rect;
             Vector2 position = outerRect.position;
@@ -82,7 +68,7 @@ namespace MorePlanning.Designators
             // BEGIN EDIT
             //Widgets.DrawTextureFitted(outerRect, badTex, iconDrawScale * 0.85f, iconProportions, iconTexCoords, iconAngle, material);
 
-            this.CustomGizmoOnGUI(topLeft, rect);
+            CustomGizmoOnGui(topLeft, rect);
 
             // END EDIT
             GUI.color = Color.white;
@@ -99,7 +85,7 @@ namespace MorePlanning.Designators
                     Event.current.Use();
                 }
             }
-            if (Widgets.ButtonInvisible(rect, false))
+            if (Widgets.ButtonInvisible(rect))
             {
                 flag2 = true;
             }

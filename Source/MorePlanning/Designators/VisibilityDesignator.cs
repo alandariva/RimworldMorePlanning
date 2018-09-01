@@ -9,17 +9,14 @@ namespace MorePlanning.Designators
 {
     public class VisibilityDesignator : Designator
     {
-        private static bool planningVisibility = true;
+        private static bool _planningVisibility = true;
 
         public static bool PlanningVisibility
         {
-            get
-            {
-                return planningVisibility;
-            }
+            get => _planningVisibility;
             set
             {
-                planningVisibility = value;
+                _planningVisibility = value;
                 UpdateIconTool();
                 MorePlanningMod.Instance.SetPlanningVisibility(value);
             }
@@ -27,10 +24,10 @@ namespace MorePlanning.Designators
 
         public VisibilityDesignator()
         {
-            this.defaultLabel = "MorePlanning.PlanVisibility".Translate();
-            this.defaultDesc = "MorePlanning.PlanVisibilityDesc".Translate();
-            this.soundSucceeded = SoundDefOf.Designate_PlanAdd;
-            this.hotKey = KeyBindingDefOf.Misc12;
+            defaultLabel = "MorePlanning.PlanVisibility".Translate();
+            defaultDesc = "MorePlanning.PlanVisibilityDesc".Translate();
+            soundSucceeded = SoundDefOf.Designate_PlanAdd;
+            hotKey = KeyBindingDefOf.Misc12;
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 loc)
@@ -43,24 +40,14 @@ namespace MorePlanning.Designators
         {
             var desPlanningVisibility = MenuUtility.GetPlanningDesignator<VisibilityDesignator>();
 
-            if (planningVisibility)
-            {
-                desPlanningVisibility.icon = Resources.IconVisible;
-            }
-            else
-            {
-                desPlanningVisibility.icon = Resources.IconInvisible;
-            }
+            desPlanningVisibility.icon = _planningVisibility ? Resources.IconVisible : Resources.IconInvisible;
         }
 
         public override void ProcessInput(Event ev)
         {
-            if (this.CurActivateSound != null)
-            {
-                this.CurActivateSound.PlayOneShotOnCamera();
-            }
+            CurActivateSound?.PlayOneShotOnCamera();
             Find.DesignatorManager.Deselect();
-            PlanningVisibility = !planningVisibility;
+            PlanningVisibility = !_planningVisibility;
         }
     }
 }

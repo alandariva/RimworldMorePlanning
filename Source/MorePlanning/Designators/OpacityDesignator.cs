@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using MorePlanning.Utility;
 using UnityEngine;
 using Verse;
@@ -7,33 +8,30 @@ namespace MorePlanning.Designators
 {
     public class OpacityDesignator : Designator
     {
-        private static int opacity = 0;
+        private static int _opacity;
 
         public static int Opacity
         {
-            get
-            {
-                return opacity;
-            }
+            get => _opacity;
             set
             {
-                opacity = value;
+                _opacity = value;
                 UpdateLabel();
-                MorePlanningMod.Instance.PlanOpacity = opacity;
+                MorePlanningMod.Instance.PlanOpacity = _opacity;
             }
         }
 
         public OpacityDesignator()
         {
-            this.defaultLabel = "MorePlanning.Opacity.label".Translate(0);
-            this.defaultDesc = "MorePlanning.Opacity.desc".Translate();
-            this.icon = ContentFinder<Texture2D>.Get("UI/Opacity", true);
+            defaultLabel = "MorePlanning.Opacity.label".Translate(0);
+            defaultDesc = "MorePlanning.Opacity.desc".Translate();
+            icon = ContentFinder<Texture2D>.Get("UI/Opacity");
         }
 
         public static void UpdateLabel()
         {
             var desOpacity = MenuUtility.GetPlanningDesignator<OpacityDesignator>();
-            desOpacity.defaultLabel = "MorePlanning.Opacity.label".Translate(opacity);
+            desOpacity.defaultLabel = "MorePlanning.Opacity.label".Translate(_opacity);
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 loc)
@@ -43,20 +41,21 @@ namespace MorePlanning.Designators
 
         public override void ProcessInput(Event ev)
         {
-            int[] opacityOptions = new int[] { 10, 15, 20, 25, 30, 40, 50, 60, 70, 80 };
+            int[] opacityOptions = { 10, 15, 20, 25, 30, 40, 50, 60, 70, 80 };
             List<FloatMenuOption> options = new List<FloatMenuOption>();
 
-            for (int i = 0; i < opacityOptions.Length; i++)
+            foreach (var value in opacityOptions)
             {
-                int value = opacityOptions[i];
                 string label = value + "%";
-                if (value == MorePlanningMod.Instance.DefaultPlanOpacity)
+                if (Math.Abs(value - MorePlanningMod.Instance.DefaultPlanOpacity) < 1)
                 {
                     label += " " + "MorePlanning.DefaultOpacity".Translate();
                 }
+
+                var value1 = value;
                 options.Add(new FloatMenuOption(label, delegate {
-                    MorePlanningMod.Instance.PlanOpacity = value;
-                    this.defaultLabel = "MorePlanning.Opacity.label".Translate(value);
+                    MorePlanningMod.Instance.PlanOpacity = value1;
+                    defaultLabel = "MorePlanning.Opacity.label".Translate(value1);
                 }));
             }
 

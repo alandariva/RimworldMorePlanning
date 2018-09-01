@@ -4,118 +4,97 @@ namespace MorePlanning.Common
 {
     public class AdaptableColor
     {
-        protected string hexColor;
-        protected float h, s, v;
-        protected float r, g, b, a;
+        private string _hexColor;
+        private float _h, _s, _v;
+        private float _r, _g, _b, _a;
 
+        // ReSharper disable once UnusedMember.Global
         public AdaptableColor()
         {
-            this.ObjColor = new Color();
+            Color = new Color();
         }
 
         public AdaptableColor(Color c)
         {
-            this.ObjColor = c;
+            Color = c;
         }
 
-        public Color ObjColorH
-        {
-            get
-            {
-                return Color.HSVToRGB(h, 1, 1);
-            }
-        }
+        public Color ObjColorH => Color.HSVToRGB(_h, 1, 1);
 
-        public Color ObjColor
+        public Color Color
         {
-            get
-            {
-                return new Color(this.r, this.g, this.b, this.a);
-            }
+            get => new Color(_r, _g, _b, _a);
 
             set
             {
-                this.r = value.r;
-                this.g = value.g;
-                this.b = value.b;
-                this.a = value.a;
-                Color.RGBToHSV(this.ObjColor, out h, out s, out v);
-                this.hexColor = ColorUtility.ToHtmlStringRGB(this.ObjColor);
+                _r = value.r;
+                _g = value.g;
+                _b = value.b;
+                _a = value.a;
+                Color.RGBToHSV(Color, out _h, out _s, out _v);
+                _hexColor = ColorUtility.ToHtmlStringRGB(Color);
             }
         }
 
         public string HexColor
         {
-            get
-            {
-                return hexColor;
-            }
+            get => _hexColor;
 
             set
             {
-                Color color = new Color();
-                if (ColorUtility.TryParseHtmlString(value, out color) == false)
+                if (ColorUtility.TryParseHtmlString(value, out var color) == false)
                 {
                     return;
                 }
 
-                color.a = this.a;
+                color.a = _a;
 
-                this.ObjColor = color;
+                Color = color;
             }
         }
 
         public float H
         {
-            get
-            {
-                return h;
-            }
+            get => _h;
 
             set
             {
-                this.h = value;
-                Color c = Color.HSVToRGB(h, s, v);
-                r = c.r;
-                g = c.g;
-                b = c.b;
-                this.hexColor = ColorUtility.ToHtmlStringRGB(this.ObjColor);
+                _h = value;
+                Color c = Color.HSVToRGB(_h, _s, _v);
+                _r = c.r;
+                _g = c.g;
+                _b = c.b;
+                _hexColor = ColorUtility.ToHtmlStringRGB(Color);
             }
         }
 
         public float S
         {
-            get
-            {
-                return s;
-            }
+            get => _s;
 
             set
             {
-                this.s = value;
-                Color c = Color.HSVToRGB(h, s, v);
-                r = c.r;
-                g = c.g;
-                b = c.b;
-                this.hexColor = ColorUtility.ToHtmlStringRGB(this.ObjColor);
+                _s = value;
+                Color c = Color.HSVToRGB(_h, _s, _v);
+                _r = c.r;
+                _g = c.g;
+                _b = c.b;
+                _hexColor = ColorUtility.ToHtmlStringRGB(Color);
             }
         }
 
         public float V
         {
-            get
-            {
-                return v;
-            }
+            get => _v;
 
             set
             {
-                this.v = value;
-                Color c = Color.HSVToRGB(h, s, v);
-                r = c.r;
-                g = c.g;
-                b = c.b;
-                this.hexColor = ColorUtility.ToHtmlStringRGB(this.ObjColor);
+                _v = value;
+                Color c = Color.HSVToRGB(_h, _s, _v);
+                _r = c.r;
+                _g = c.g;
+                _b = c.b;
+                _hexColor = ColorUtility.ToHtmlStringRGB(Color);
             }
         }
     }

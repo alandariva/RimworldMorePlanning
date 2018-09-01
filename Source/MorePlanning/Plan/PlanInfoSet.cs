@@ -9,14 +9,13 @@ namespace MorePlanning.Plan
 {
     public class PlanInfoSet
     {
-        protected List<PlanInfo> planDesignationInfo;
+        protected List<PlanInfo> PlanDesignationInfo;
 
-        private IntVec2 size;
-        public IntVec2 Size { get => size; private set => size = value; }
+        public IntVec2 Size { get; private set; }
 
         public PlanInfoSet(List<PlanInfo> planDesignationInfo)
         {
-            this.planDesignationInfo = planDesignationInfo;
+            PlanDesignationInfo = planDesignationInfo;
 
             int left = planDesignationInfo.Min(plan => plan.Pos.x);
             int top = planDesignationInfo.Max(plan => plan.Pos.z);
@@ -24,15 +23,14 @@ namespace MorePlanning.Plan
             int bottom = planDesignationInfo.Min(plan => plan.Pos.z);
 
             // Size of selection (+1 because selection on same cell will have 1 size)
-            this.size = new IntVec2(right - left + 1, top - bottom + 1);
+            Size = new IntVec2(right - left + 1, top - bottom + 1);
         }
 
         public void Draw(IntVec3 intVec, Map map)
         {
             List<IntVec3> cells = new List<IntVec3>();
 
-            var planDef = DefDatabase<PlanDesignationDef>.GetNamed("Plan", true);
-            foreach (var planDesInfo in planDesignationInfo)
+            foreach (var planDesInfo in PlanDesignationInfo)
             {
                 IntVec3 pos = planDesInfo.Pos + intVec;
 
@@ -41,8 +39,8 @@ namespace MorePlanning.Plan
                     continue;
                 }
 
-                Vector3 position = pos.ToVector3ShiftedWithAltitude(Altitudes.AltitudeFor(AltitudeLayer.MetaOverlays));
-                Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, Resources.planMatColor[planDesInfo.Color], 0);
+                Vector3 position = pos.ToVector3ShiftedWithAltitude(AltitudeLayer.MetaOverlays.AltitudeFor());
+                Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, Resources.PlanMatColor[planDesInfo.Color], 0);
                 cells.Add(pos);
             }
 
@@ -51,8 +49,8 @@ namespace MorePlanning.Plan
 
         public void DesignateFromOrigin(IntVec3 c, Map map)
         {
-            var planDef = DefDatabase<PlanDesignationDef>.GetNamed("Plan", true);
-            foreach (var planDesInfo in planDesignationInfo)
+            var planDef = DefDatabase<PlanDesignationDef>.GetNamed("Plan");
+            foreach (var planDesInfo in PlanDesignationInfo)
             {
                 IntVec3 pos = planDesInfo.Pos + c;
 
@@ -68,16 +66,9 @@ namespace MorePlanning.Plan
 
         public void Rotate(RotationDirection rotationDirection)
         {
-            foreach (var planDesInfo in planDesignationInfo)
+            foreach (var planDesInfo in PlanDesignationInfo)
             {
-                if (rotationDirection == RotationDirection.Clockwise)
-                {
-                    planDesInfo.Pos = planDesInfo.Pos.RotatedBy(Rot4.East);
-                }
-                else
-                {
-                    planDesInfo.Pos = planDesInfo.Pos.RotatedBy(Rot4.West);
-                }
+                planDesInfo.Pos = planDesInfo.Pos.RotatedBy(rotationDirection == RotationDirection.Clockwise ? Rot4.East : Rot4.West);
             }
         }
 

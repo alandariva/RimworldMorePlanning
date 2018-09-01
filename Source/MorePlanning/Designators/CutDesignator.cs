@@ -1,10 +1,7 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using RimWorld;
-using Verse;
-using System;
 using MorePlanning.Utility;
 using UnityEngine;
+using Verse;
 
 namespace MorePlanning.Designators
 {
@@ -13,9 +10,9 @@ namespace MorePlanning.Designators
 
         public CutDesignator()
         {
-            this.defaultLabel = "MorePlanning.PlanCut".Translate();
-            this.defaultDesc = "MorePlanning.PlanCutDesc".Translate();
-            this.icon = ContentFinder<Texture2D>.Get("UI/PlanCut", true);
+            defaultLabel = "MorePlanning.PlanCut".Translate();
+            defaultDesc = "MorePlanning.PlanCutDesc".Translate();
+            icon = ContentFinder<Texture2D>.Get("UI/PlanCut");
         }
 
         public override void RenderHighlight(List<IntVec3> dragCells)
@@ -29,7 +26,7 @@ namespace MorePlanning.Designators
 
             foreach(var cell in cells)
             {
-                MapUtility.RemoveAllPlanDesignationAt(cell, this.Map);
+                MapUtility.RemoveAllPlanDesignationAt(cell, Map);
             }
         }
 

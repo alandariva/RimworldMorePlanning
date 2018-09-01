@@ -10,10 +10,7 @@ namespace MorePlanning.Utility
             foreach (DesignationDef def in MorePlanningMod.PlanDesDefs)
             {
                 Designation desAt = map.designationManager.DesignationAt(c, def);
-                if (desAt != null)
-                {
-                    desAt.Delete();
-                }
+                desAt?.Delete();
             }
         }
 
@@ -49,13 +46,10 @@ namespace MorePlanning.Utility
 
         public static bool HasPlanDesignationAt(IntVec3 c, Map map, int color)
         {
-            foreach (DesignationDef def in MorePlanningMod.PlanDesDefs)
+            var designation = GetPlanDesignationAt(c, map);
+            if ((designation != null) && (designation.Color == color))
             {
-                var designation = GetPlanDesignationAt(c, map);
-                if ((designation != null) && (designation.color == color))
-                {
-                    return true;
-                }
+                return true;
             }
 
             return false;

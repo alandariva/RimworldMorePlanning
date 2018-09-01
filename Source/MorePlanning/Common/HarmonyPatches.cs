@@ -5,6 +5,11 @@ using MorePlanning.Plan;
 using UnityEngine;
 using Verse;
 
+// ReSharper disable InconsistentNaming
+// ReSharper disable UnusedMember.Global
+// ReSharper disable UnusedMember.Local
+// ReSharper disable ArrangeTypeModifiers
+
 namespace MorePlanning.Common
 {
     [StaticConstructorOnStartup]
@@ -35,13 +40,13 @@ namespace MorePlanning.Common
 
             int colorId = 0;
 
-            if (__instance is PlanDesignation)
+            if (__instance is PlanDesignation designation)
             {
-                colorId = (__instance as PlanDesignation).color;
+                colorId = designation.Color;
             }
 
-            Vector3 position = position = __instance.target.Cell.ToVector3ShiftedWithAltitude(__instance.DesignationDrawAltitude);
-            Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, Resources.planMatColor[colorId], 0);
+            Vector3 position = __instance.target.Cell.ToVector3ShiftedWithAltitude(__instance.DesignationDrawAltitude);
+            Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, Resources.PlanMatColor[colorId], 0);
 
             return false;
         }
@@ -49,13 +54,13 @@ namespace MorePlanning.Common
 
     [HarmonyPatch(typeof(Designation))]
     [HarmonyPatch("ExposeData")]
-    class DesignatioPlanningExposeData
+    class DesignationPlanningExposeData
     {
         static bool Prefix(Designation __instance)
         {
-            if (__instance is PlanDesignation)
+            if (__instance is PlanDesignation designation)
             {
-                Scribe_Values.Look<int>(ref (__instance as PlanDesignation).color, "Color", 0, true);
+                Scribe_Values.Look(ref designation.Color, "Color", 0, true);
             }
             
             return true;

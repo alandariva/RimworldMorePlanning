@@ -1,4 +1,5 @@
-﻿using MorePlanning.Common;
+﻿using System;
+using MorePlanning.Common;
 using MorePlanning.Plan;
 using UnityEngine;
 using Verse;
@@ -8,116 +9,112 @@ namespace MorePlanning.Dialogs
 {
     public class ColorSelectorDialog : Window
     {
-        protected AdaptableColor color;
+        protected AdaptableColor Color;
 
-        protected string inputColorHex;
+        protected string InputColorHex;
 
-        protected string hexColorBefore;
+        protected string HexColorBefore;
 
-        protected float slider;
+        protected float Slider;
 
         protected float S;
         protected float V;
 
-        protected int numColor;
+        protected int NumColor;
 
-        protected bool acceptColor = false;
+        protected bool AcceptColor;
 
-        public override Vector2 InitialSize
-        {
-            get
-            {
-                return new Vector2(416f, 292f);
-            }
-        }
+        public override Vector2 InitialSize => new Vector2(416f, 292f);
 
         public ColorSelectorDialog(int numColor)
         {
-            this.numColor = numColor;
-            this.color = new AdaptableColor(PlanColorManager.planColor[numColor]);
+            NumColor = numColor;
+            Color = new AdaptableColor(PlanColorManager.PlanColor[numColor]);
 
-            this.inputColorHex = this.color.HexColor;
-            this.slider = this.color.H;
-            this.S = this.color.S;
-            this.V = this.color.V;
+            InputColorHex = Color.HexColor;
+            Slider = Color.H;
+            S = Color.S;
+            V = Color.V;
 
-            this.hexColorBefore = this.inputColorHex;
-            this.forcePause = true;
-            this.doCloseX = true;
-            this.absorbInputAroundWindow = true;
-            this.closeOnClickedOutside = true;
+            HexColorBefore = InputColorHex;
+            forcePause = true;
+            doCloseX = true;
+            absorbInputAroundWindow = true;
+            closeOnClickedOutside = true;
         }
 
         public override void PreClose()
         {
-            if (acceptColor == false)
+            if (AcceptColor == false)
             {
-                PlanColorManager.ChangeColor(numColor, this.hexColorBefore);
+                PlanColorManager.ChangeColor(NumColor, HexColorBefore);
             }
         }
 
         public override void DoWindowContents(Rect inRect)
         {
-            Color beforeColor = this.color.ObjColor;
+            Color beforeColor = Color.Color;
 
-            Rect colorSB = new Rect(0, 0, 10, 10);
-            colorSB.center = new Vector2(256 * S, 256 - 256 * V);
+            Rect colorSb = new Rect(0, 0, 10, 10)
+            {
+                center = new Vector2(256 * S, 256 - 256 * V)
+            };
 
             if (GUI.RepeatButton(new Rect(0, 0, 256, 256), ""))
             {
-                this.color.S = (Event.current.mousePosition.x - inRect.x) / 256f;
-                this.color.V = 1f - (Event.current.mousePosition.y - inRect.y) / 256f;
+                Color.S = (Event.current.mousePosition.x - inRect.x) / 256f;
+                Color.V = 1f - (Event.current.mousePosition.y - inRect.y) / 256f;
             }
-            Widgets.DrawBoxSolid(new Rect(0, 0, 256, 256), this.color.ObjColorH);
+            Widgets.DrawBoxSolid(new Rect(0, 0, 256, 256), Color.ObjColorH);
             GUI.DrawTexture(new Rect(0, 0, 256, 256), Resources.ColorPickerOverlay);
-            GUI.DrawTexture(colorSB, Resources.ColorPickerSelect);
+            GUI.DrawTexture(colorSb, Resources.ColorPickerSelect);
 
             GUI.DrawTexture(new Rect(275, 0, 19, 256), Resources.HsvSlider);
 
-            float newSlider = GUI.VerticalSlider(new Rect(264f, 0f, 11, 256f), slider, 1, 0);
+            float newSlider = GUI.VerticalSlider(new Rect(264f, 0f, 11, 256f), Slider, 1, 0);
 
-            Widgets.DrawBoxSolid(new Rect(305, 0, 76, 76), this.color.ObjColor);
+            Widgets.DrawBoxSolid(new Rect(305, 0, 76, 76), Color.Color);
 
-            string textHex = Widgets.TextField(new Rect(305f, 91f, 76f, 23f), this.inputColorHex);
+            string textHex = Widgets.TextField(new Rect(305f, 91f, 76f, 23f), InputColorHex);
 
             bool defaultColorClicked = Widgets.ButtonText(new Rect(305f, 128f, 76f, 50f), "MorePlanning.DefaultColor".Translate());
             bool okClicked = Widgets.ButtonText(new Rect(305f, 234f, 76f, 23f), "MorePlanning.Ok".Translate());
 
-            if (newSlider != slider)
+            if (Math.Abs(newSlider - Slider) > 0.01)
             {
-                this.color.H = newSlider;
-                this.slider = newSlider;
+                Color.H = newSlider;
+                Slider = newSlider;
             }
 
             bool colorHexChanged = false;
-            if (textHex != this.inputColorHex)
+            if (textHex != InputColorHex)
             {
-                this.color.HexColor = "#" + textHex;
-                this.inputColorHex = textHex;
+                Color.HexColor = "#" + textHex;
+                InputColorHex = textHex;
                 colorHexChanged = true;
             }
 
             if (defaultColorClicked)
             {
-                this.color.HexColor = "#" + PlanColorManager.defaultColors[numColor];
+                Color.HexColor = "#" + PlanColorManager.DefaultColors[NumColor];
             }
 
             if (okClicked)
             {
-                this.acceptColor = true;
-                this.Close();
+                AcceptColor = true;
+                Close();
             }
 
-            if (!beforeColor.Equals(this.color.ObjColor))
+            if (!beforeColor.Equals(Color.Color))
             {
-                slider = this.color.H;
-                this.S = this.color.S;
-                this.V = this.color.V;
+                Slider = Color.H;
+                S = Color.S;
+                V = Color.V;
                 if (colorHexChanged == false)
                 {
-                    this.inputColorHex = this.color.HexColor;
+                    InputColorHex = Color.HexColor;
                 }
-                PlanColorManager.ChangeColor(numColor, this.color.HexColor);
+                PlanColorManager.ChangeColor(NumColor, Color.HexColor);
             }
         }
     }

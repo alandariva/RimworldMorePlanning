@@ -7,14 +7,14 @@ namespace MorePlanning.Utility
     class MenuUtility
     {
 
-        private static FieldInfo resolvedDesignatorsInfo = null;
+        private static FieldInfo _resolvedDesignatorsInfo;
 
         public static void InitReflection()
         {
             FieldInfo field = typeof(DesignationCategoryDef).GetField("resolvedDesignators", BindingFlags.Instance | BindingFlags.NonPublic);
-            resolvedDesignatorsInfo = field;
+            _resolvedDesignatorsInfo = field;
 
-            if (resolvedDesignatorsInfo == null)
+            if (_resolvedDesignatorsInfo == null)
             {
                 MorePlanningMod.LogError("Reflection failed (MenuUtility::InitReflection, DesignationCategoryDef.resolvedDesignators)");
             }
@@ -22,7 +22,7 @@ namespace MorePlanning.Utility
 
         public static List<Designator> GetPlanningDesignators()
         {
-            if (resolvedDesignatorsInfo == null)
+            if (_resolvedDesignatorsInfo == null)
             {
                 InitReflection();
             }
@@ -35,7 +35,7 @@ namespace MorePlanning.Utility
                 return null;
             }
 
-            return (List<Designator>)resolvedDesignatorsInfo.GetValue(planningCategory);
+            return (List<Designator>)_resolvedDesignatorsInfo?.GetValue(planningCategory);
         }
 
         public static T GetPlanningDesignator<T>() where T: class
@@ -43,9 +43,10 @@ namespace MorePlanning.Utility
             var designators = GetPlanningDesignators();
             foreach (var designator in designators)
             {
-                if (designator is T)
+                var targetDesignator = designator as T;
+                if (targetDesignator != null)
                 {
-                    return designator as T;
+                    return targetDesignator;
                 }
             }
 

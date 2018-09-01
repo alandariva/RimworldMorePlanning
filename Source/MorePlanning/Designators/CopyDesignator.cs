@@ -1,52 +1,39 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
-using RimWorld;
-using Verse;
-using System;
-using UnityEngine;
-using MorePlanning.Designators;
 using MorePlanning.Plan;
 using MorePlanning.Utility;
+using RimWorld;
+using UnityEngine;
+using Verse;
 
 namespace MorePlanning.Designators
 {
     public class CopyDesignator : BaseDesignator
     {
 
-        public override int DraggableDimensions
-        {
-            get
-            {
-                return 2;
-            }
-        }
+        public override int DraggableDimensions => 2;
 
-        public override bool DragDrawMeasurements
-        {
-            get
-            {
-                return true;
-            }
-        }
+        public override bool DragDrawMeasurements => true;
 
         public CopyDesignator()
         {
-            this.defaultLabel = "MorePlanning.PlanCopy".Translate();
-            this.defaultDesc = "MorePlanning.PlanCopyDesc".Translate();
-            this.icon = ContentFinder<Texture2D>.Get("UI/PlanCopy", true);
+            defaultLabel = "MorePlanning.PlanCopy".Translate();
+            defaultDesc = "MorePlanning.PlanCopyDesc".Translate();
+            icon = ContentFinder<Texture2D>.Get("UI/PlanCopy");
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
         {
-            if (!c.InBounds(base.Map))
+            if (!c.InBounds(Map))
             {
                 return false;
             }
-            if (c.InNoBuildEdgeArea(base.Map))
+            if (c.InNoBuildEdgeArea(Map))
             {
                 return "TooCloseToMapEdge".Translate();
             }
-            return MapUtility.HasAnyPlanDesignationAt(c, this.Map);
+            return MapUtility.HasAnyPlanDesignationAt(c, Map);
         }
 
         public override void RenderHighlight(List<IntVec3> dragCells)
@@ -56,7 +43,7 @@ namespace MorePlanning.Designators
 
         public override void DesignateMultiCell(IEnumerable<IntVec3> cells)
         {
-            var planDesignations = cells.Select(cell => MapUtility.GetPlanDesignationAt(cell, this.Map)).Where(cell => cell != null).ToList();
+            var planDesignations = cells.Select(cell => MapUtility.GetPlanDesignationAt(cell, Map)).Where(cell => cell != null).ToList();
             cells = planDesignations.Select(plan => plan.target.Cell);
 
             if (planDesignations.Count == 0)
@@ -99,10 +86,10 @@ namespace MorePlanning.Designators
             // Copy all data from designations
             foreach (var planDesignation in planDesignations)
             {
-                var planInfo = new PlanInfo()
+                var planInfo = new PlanInfo
                 {
-                    Color = (planDesignation is PlanDesignation) ? (planDesignation as PlanDesignation).color : 0,
-                    Pos = new IntVec3(planDesignation.target.Cell.x - sizeCompX, planDesignation.target.Cell.y, planDesignation.target.Cell.z - sizeCompZ),
+                    Color = planDesignation.Color,
+                    Pos = new IntVec3(planDesignation.target.Cell.x - sizeCompX, planDesignation.target.Cell.y, planDesignation.target.Cell.z - sizeCompZ)
                 };
                 planDesignationInfo.Add(planInfo);
             }

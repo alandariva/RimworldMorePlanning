@@ -1,11 +1,8 @@
-﻿using RimWorld;
-using System;
-using MorePlanning.Designators;
-using MorePlanning.Plan;
+﻿using MorePlanning.Plan;
 using MorePlanning.Utility;
+using RimWorld;
 using UnityEngine;
 using Verse;
-using Verse.Sound;
 using Resources = MorePlanning.Common.Resources;
 
 namespace MorePlanning.Designators
@@ -15,31 +12,31 @@ namespace MorePlanning.Designators
 
         public RemoveDesignator()
         {
-            this.defaultLabel = "DesignatorPlanRemove".Translate();
-            this.defaultDesc = "DesignatorPlanRemoveDesc".Translate();
+            defaultLabel = "DesignatorPlanRemove".Translate();
+            defaultDesc = "DesignatorPlanRemoveDesc".Translate();
 
-            this.soundSucceeded = SoundDefOf.Designate_PlanRemove;
-            this.hotKey = KeyBindingDefOf.Designator_Deconstruct;
+            soundSucceeded = SoundDefOf.Designate_PlanRemove;
+            hotKey = KeyBindingDefOf.Designator_Deconstruct;
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
         {
-            if (!c.InBounds(base.Map))
+            if (!c.InBounds(Map))
             {
                 return false;
             }
 
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
-                return MapUtility.HasAnyPlanDesignationAt(c, this.Map);
+                return MapUtility.HasAnyPlanDesignationAt(c, Map);
             }
 
-            return MapUtility.HasPlanDesignationAt(c, this.Map, MorePlanningMod.Instance.SelectedColor);
+            return MapUtility.HasPlanDesignationAt(c, Map, MorePlanningMod.Instance.SelectedColor);
         }
 
         public override void DesignateSingleCell(IntVec3 c)
         {
-            MapUtility.RemoveAllPlanDesignationAt(c, this.Map);
+            MapUtility.RemoveAllPlanDesignationAt(c, Map);
         }
 
         public override void DrawMouseAttachments()
@@ -49,18 +46,18 @@ namespace MorePlanning.Designators
 
             if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
             {
-                Widgets.DrawTextureFitted(new Rect(mousePosition.x + 12f, num, 32f, 32f), Resources.PlanToolRemoveAll, this.iconDrawScale);
+                Widgets.DrawTextureFitted(new Rect(mousePosition.x + 12f, num, 32f, 32f), Resources.PlanToolRemoveAll, iconDrawScale);
             }
             else
             {
-                Graphics.DrawTexture(new Rect(mousePosition.x + 12f, num, 32f, 32f), Resources.Plan, this.iconTexCoords, 0, 1, 0, 1, PlanColorManager.planColor[MorePlanningMod.Instance.SelectedColor]);
-                Widgets.DrawTextureFitted(new Rect(mousePosition.x + 12f, num, 32f, 32f), Resources.RemoveIcon, this.iconDrawScale);
+                Graphics.DrawTexture(new Rect(mousePosition.x + 12f, num, 32f, 32f), Resources.Plan, iconTexCoords, 0, 1, 0, 1, PlanColorManager.PlanColor[MorePlanningMod.Instance.SelectedColor]);
+                Widgets.DrawTextureFitted(new Rect(mousePosition.x + 12f, num, 32f, 32f), Resources.RemoveIcon, iconDrawScale);
             }
         }
 
-        protected override void CustomGizmoOnGUI(Vector2 topLeft, Rect rect)
+        protected override void CustomGizmoOnGui(Vector2 topLeft, Rect rect)
         {
-            Rect position = new Rect(0f, 0f, this.iconProportions.x, this.iconProportions.y);
+            Rect position = new Rect(0f, 0f, iconProportions.x, iconProportions.y);
             float num;
             if (position.width / position.height < rect.width / rect.height)
             {
@@ -78,8 +75,8 @@ namespace MorePlanning.Designators
 
             if (Event.current.type == EventType.Repaint)
             {
-                Graphics.DrawTexture(position, Resources.Plan, this.iconTexCoords, 0, 1, 0, 1, PlanColorManager.planColor[MorePlanningMod.Instance.SelectedColor]);
-                Widgets.DrawTextureFitted(new Rect(rect), Resources.RemoveIcon, this.iconDrawScale * 0.85f, this.iconProportions, this.iconTexCoords);
+                Graphics.DrawTexture(position, Resources.Plan, iconTexCoords, 0, 1, 0, 1, PlanColorManager.PlanColor[MorePlanningMod.Instance.SelectedColor]);
+                Widgets.DrawTextureFitted(new Rect(rect), Resources.RemoveIcon, iconDrawScale * 0.85f, iconProportions, iconTexCoords);
             }
         }
 

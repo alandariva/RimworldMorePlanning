@@ -1,14 +1,14 @@
 ﻿using Verse;
 
-namespace MorePlanning.Plan
+namespace MorePlanning // Need to be outside of Plan for compability with older saves
 {
     public class PlanDesignation : Designation
     {
-        public int color = 0;
+        public int Color;
 
         public PlanDesignation(LocalTargetInfo target, DesignationDef def, int color) : base(target, def)
         {
-            this.color = color;
+            Color = color;
         }
 
         public PlanDesignation()

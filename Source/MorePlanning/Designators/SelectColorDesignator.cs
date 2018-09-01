@@ -1,46 +1,44 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
-using RimWorld;
-using Verse;
-using UnityEngine;
-using Verse.Sound;
-using System;
-using MorePlanning.Designators;
+using MorePlanning.Dialogs;
 using MorePlanning.Plan;
 using MorePlanning.Utility;
+using RimWorld;
+using UnityEngine;
+using Verse;
+using Verse.Sound;
 using Resources = MorePlanning.Common.Resources;
 
 namespace MorePlanning.Designators
 {
     public class SelectColorDesignator : BaseDesignator
     {
-        protected int color = 0;
+        protected int Color;
 
         public SelectColorDesignator(int color)
         {
-            this.color = color;
-            this.defaultLabel = "" + color;
-            this.defaultDesc = "MorePlanning.PlanDesc".Translate();
+            Color = color;
+            defaultLabel = "" + color;
+            defaultDesc = "MorePlanning.PlanDesc".Translate();
         }
 
         public override void ProcessInput(Event ev)
         {
             // Show change color option
-            List<FloatMenuOption> list = new List<FloatMenuOption>();
-
-            list.Add(new FloatMenuOption("MorePlanning.ChangeColor".Translate(), delegate
+            List<FloatMenuOption> list = new List<FloatMenuOption>
             {
-                Find.WindowStack.Add(new Dialogs.ColorSelectorDialog(color));
-            }, MenuOptionPriority.Default, null, null, 0, null, null));
+                new FloatMenuOption("MorePlanning.ChangeColor".Translate(),
+                    delegate { Find.WindowStack.Add(new ColorSelectorDialog(Color)); })
+            };
+
 
             Find.WindowStack.Add(new FloatMenu(list));
 
             // Select color
-            MorePlanningMod.Instance.SelectedColor = this.color;
-
+            MorePlanningMod.Instance.SelectedColor = Color;
+            
             if (Find.DesignatorManager.SelectedDesignator == null)
             {
-                var designatorPlanPaste = MenuUtility.GetPlanningDesignator<Designator_PlanAdd>();
+                var designatorPlanPaste = MenuUtility.GetPlanningDesignator<AddDesignator>();
                 Find.DesignatorManager.Select(designatorPlanPaste);
             }
         }
@@ -60,12 +58,12 @@ namespace MorePlanning.Designators
                 }
             }
             Texture2D badTex = icon;
-            if ((UnityEngine.Object)badTex == (UnityEngine.Object)null)
+            if (badTex == null)
             {
                 badTex = BaseContent.BadTex;
             }
             Material material = (!disabled) ? null : TexUI.GrayscaleGUI;
-            GenUI.DrawTextureWithMaterial(rect, BGTex, material, default(Rect));
+            GenUI.DrawTextureWithMaterial(rect, BGTex, material);
             MouseoverSounds.DoRegion(rect, SoundDefOf.Mouseover_Command);
             Rect outerRect = rect;
             Vector2 position = outerRect.position;
@@ -79,7 +77,7 @@ namespace MorePlanning.Designators
             // BEGIN EDIT
             //Widgets.DrawTextureFitted(outerRect, badTex, iconDrawScale * 0.85f, iconProportions, iconTexCoords, iconAngle, material);
             {
-                Rect positionColor = new Rect(0f, 0f, this.iconProportions.x, this.iconProportions.y);
+                Rect positionColor = new Rect(0f, 0f, iconProportions.x, iconProportions.y);
                 float num;
                 if (positionColor.width / positionColor.height < rect.width / rect.height)
                 {
@@ -89,25 +87,21 @@ namespace MorePlanning.Designators
                 {
                     num = rect.width / positionColor.width;
                 }
-                num *= this.iconDrawScale * 0.85f;
+                num *= iconDrawScale * 0.85f;
                 positionColor.width *= num;
                 positionColor.height *= num;
                 positionColor.x = rect.x + rect.width / 2f - positionColor.width / 2f;
                 positionColor.y = rect.y + rect.height / 2f - positionColor.height / 2f;
 
-                Widgets.DrawBoxSolid(positionColor, PlanColorManager.planColor[this.color]);
+                Widgets.DrawBoxSolid(positionColor, PlanColorManager.PlanColor[Color]);
 
-                if (MorePlanningMod.Instance.SelectedColor == this.color)
-                {
-                    Widgets.DrawTextureFitted(outerRect, Resources.ToolBoxColorSelected, this.iconDrawScale * 0.85f, this.iconProportions, this.iconTexCoords);
-                }
-                else
-                {
-                    Widgets.DrawTextureFitted(outerRect, Resources.ToolBoxColor, this.iconDrawScale * 0.85f, this.iconProportions, this.iconTexCoords);
-                }
+                Widgets.DrawTextureFitted(outerRect,
+                    MorePlanningMod.Instance.SelectedColor == Color
+                        ? Resources.ToolBoxColorSelected
+                        : Resources.ToolBoxColor, iconDrawScale * 0.85f, iconProportions, iconTexCoords);
             }
             // END EDIT
-            GUI.color = Color.white;
+            GUI.color = UnityEngine.Color.white;
             bool flag2 = false;
             KeyCode keyCode = (hotKey != null) ? hotKey.MainKey : KeyCode.None;
             if (keyCode != 0 && !GizmoGridDrawer.drawnHotKeys.Contains(keyCode))
@@ -121,7 +115,7 @@ namespace MorePlanning.Designators
                     Event.current.Use();
                 }
             }
-            if (Widgets.ButtonInvisible(rect, false))
+            if (Widgets.ButtonInvisible(rect))
             {
                 flag2 = true;
             }
@@ -131,13 +125,13 @@ namespace MorePlanning.Designators
                 float num = Text.CalcHeight(labelCap, rect.width);
                 Rect rect3 = new Rect(rect.x, rect.yMax - num + 12f, rect.width, num);
                 GUI.DrawTexture(rect3, TexUI.GrayTextBG);
-                GUI.color = Color.white;
+                GUI.color = UnityEngine.Color.white;
                 Text.Anchor = TextAnchor.UpperCenter;
                 Widgets.Label(rect3, labelCap);
                 Text.Anchor = TextAnchor.UpperLeft;
-                GUI.color = Color.white;
+                GUI.color = UnityEngine.Color.white;
             }
-            GUI.color = Color.white;
+            GUI.color = UnityEngine.Color.white;
             if (DoTooltip)
             {
                 TipSignal tip = Desc;

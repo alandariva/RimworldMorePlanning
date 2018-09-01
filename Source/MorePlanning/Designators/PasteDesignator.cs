@@ -1,41 +1,26 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using MorePlanning.Plan;
 using RimWorld;
-using Verse;
 using UnityEngine;
+using Verse;
 using Verse.Sound;
-using MorePlanning.Designators;
-using MorePlanning.Plan;
 
 namespace MorePlanning.Designators
 {
     public class PasteDesignator : BaseDesignator
     {
-        protected static float middleMouseDownTime;
+        protected static float MiddleMouseDownTime;
 
         public static PlanInfoSet CurrentPlanCopy { get; set; }
 
-        public override int DraggableDimensions
-        {
-            get
-            {
-                return 0;
-            }
-        }
+        public override int DraggableDimensions => 0;
 
-        public override bool DragDrawMeasurements
-        {
-            get
-            {
-                return false;
-            }
-        }
+        public override bool DragDrawMeasurements => false;
 
         public PasteDesignator()
         {
-            this.defaultLabel = "MorePlanning.PlanPaste".Translate();
-            this.defaultDesc = "MorePlanning.PlanPasteDesc".Translate();
-            this.icon = ContentFinder<Texture2D>.Get("UI/PlanPaste", true);
+            defaultLabel = "MorePlanning.PlanPaste".Translate();
+            defaultDesc = "MorePlanning.PlanPasteDesc".Translate();
+            icon = ContentFinder<Texture2D>.Get("UI/PlanPaste");
         }
 
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
@@ -45,12 +30,7 @@ namespace MorePlanning.Designators
 
         public override void DesignateSingleCell(IntVec3 c)
         {
-            //bool somethingSucceeded = false;
-
-            if (CurrentPlanCopy != null)
-            {
-                CurrentPlanCopy.DesignateFromOrigin(c, this.Map);
-            }
+            CurrentPlanCopy?.DesignateFromOrigin(c, Map);
         }
 
         public override void SelectedUpdate()
@@ -61,7 +41,7 @@ namespace MorePlanning.Designators
                 if (CurrentPlanCopy != null)
                 {
                     IntVec3 intVec = UI.MouseCell();
-                    CurrentPlanCopy.Draw(intVec, this.Map);
+                    CurrentPlanCopy.Draw(intVec, Map);
                 }
             }
         }
@@ -69,7 +49,7 @@ namespace MorePlanning.Designators
         public override void DoExtraGuiControls(float leftX, float bottomY)
         {
             Rect winRect = new Rect(leftX, bottomY - 90f, 200f, 90f);
-            this.HandleRotationShortcuts();
+            HandleRotationShortcuts();
             Find.WindowStack.ImmediateWindow(73095, winRect, WindowLayer.GameUI, delegate
             {
                 RotationDirection rotationDirection = RotationDirection.None;
@@ -97,7 +77,7 @@ namespace MorePlanning.Designators
                 }
                 Text.Anchor = TextAnchor.UpperLeft;
                 Text.Font = GameFont.Small;
-            }, true, false, 1f);
+            });
         }
 
         private void HandleRotationShortcuts()
@@ -108,9 +88,9 @@ namespace MorePlanning.Designators
                 if (Event.current.type == EventType.MouseDown)
                 {
                     Event.current.Use();
-                    middleMouseDownTime = Time.realtimeSinceStartup;
+                    MiddleMouseDownTime = Time.realtimeSinceStartup;
                 }
-                if (Event.current.type == EventType.MouseUp && Time.realtimeSinceStartup - middleMouseDownTime < 0.15f)
+                if (Event.current.type == EventType.MouseUp && Time.realtimeSinceStartup - MiddleMouseDownTime < 0.15f)
                 {
                     rotationDirection = RotationDirection.Clockwise;
                 }
