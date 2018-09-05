@@ -36,6 +36,8 @@ namespace MorePlanning
 
         private SettingHandle<bool> _removeIfBuildingDespawned;
 
+        private SettingHandle<bool> _shiftKeyForSingleColor;
+
         private SettingHandle<int> _planOpacity;
         public int PlanOpacity
         {
@@ -63,10 +65,20 @@ namespace MorePlanning
 
         public override string ModIdentifier => Identifier;
 
+        public bool OverrideColors
+        {
+            get
+            {
+                return (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ^
+            MorePlanningMod.Instance._shiftKeyForSingleColor;
+            }
+        }
+
         public override void DefsLoaded()
         {
             LoadPlanDesDefs();
             _removeIfBuildingDespawned = Settings.GetHandle("removeIfBuildingDespawned", "MorePlanning.SettingRemoveIfBuildingDespawned.label".Translate(), "MorePlanning.SettingRemoveIfBuildingDespawned.desc".Translate(), false);
+            _shiftKeyForSingleColor = Settings.GetHandle("shiftKeyForSingleColor", "MorePlanning.SettingShiftKeyForSingleColor.label".Translate(), "MorePlanning.SettingShiftKeyForSingleColor.desc".Translate(), false);
             _planOpacity = Settings.GetHandle("opacity", "MorePlanning.SettingPlanOpacity.label".Translate(), "MorePlanning.SettingPlanOpacity.desc".Translate(), 25);
             _planOpacity.NeverVisible = true;
             PlanColorManager.Load(Settings);

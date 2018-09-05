@@ -28,7 +28,7 @@ namespace MorePlanning.Designators
             {
                 return "TooCloseToMapEdge".Translate();
             }
-            if ((Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) == false)
+            if (!MorePlanningMod.Instance.OverrideColors)
             {
                 if (MapUtility.HasAnyPlanDesignationAt(c, Map))
                 {
