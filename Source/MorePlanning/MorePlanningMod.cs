@@ -36,7 +36,7 @@ namespace MorePlanning
 
         private SettingHandle<bool> _removeIfBuildingDespawned;
 
-        private SettingHandle<bool> _shiftKeyForSingleColor;
+        private SettingHandle<bool> _shiftKeyForOverride;
 
         private SettingHandle<int> _planOpacity;
         public int PlanOpacity
@@ -69,8 +69,8 @@ namespace MorePlanning
         {
             get
             {
-                return (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ^
-            MorePlanningMod.Instance._shiftKeyForSingleColor;
+                return (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ==
+            MorePlanningMod.Instance._shiftKeyForOverride;
             }
         }
 
@@ -78,7 +78,7 @@ namespace MorePlanning
         {
             LoadPlanDesDefs();
             _removeIfBuildingDespawned = Settings.GetHandle("removeIfBuildingDespawned", "MorePlanning.SettingRemoveIfBuildingDespawned.label".Translate(), "MorePlanning.SettingRemoveIfBuildingDespawned.desc".Translate(), false);
-            _shiftKeyForSingleColor = Settings.GetHandle("shiftKeyForSingleColor", "MorePlanning.SettingShiftKeyForSingleColor.label".Translate(), "MorePlanning.SettingShiftKeyForSingleColor.desc".Translate(), false);
+            _shiftKeyForOverride = Settings.GetHandle("shiftKeyForOverride", "MorePlanning.SettingShiftKeyForOverride.label".Translate(), "MorePlanning.SettingShiftKeyForOverride.desc".Translate(), false);
             _planOpacity = Settings.GetHandle("opacity", "MorePlanning.SettingPlanOpacity.label".Translate(), "MorePlanning.SettingPlanOpacity.desc".Translate(), 25);
             _planOpacity.NeverVisible = true;
             PlanColorManager.Load(Settings);
