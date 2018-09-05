@@ -26,6 +26,10 @@ Features:
 
 **This mod uses HugsLib (need to be installed and loaded before More Planning) and Harmony (comes with the mod, no need to be installed)**
 
+## Contributors
+- 53N4 - Spanish translation
+- Dango998 - Chinese Simplified translation
+
 ## Building
 
 ### Stantard way
