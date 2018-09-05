@@ -26,7 +26,7 @@ namespace MorePlanning.Designators
                 return false;
             }
 
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            if (MorePlanningMod.Instance.OverrideColors)
             {
                 return MapUtility.HasAnyPlanDesignationAt(c, Map);
             }
@@ -44,7 +44,7 @@ namespace MorePlanning.Designators
             Vector2 mousePosition = Event.current.mousePosition;
             float num = mousePosition.y + 12f;
 
-            if (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift))
+            if (MorePlanningMod.Instance.OverrideColors)
             {
                 Widgets.DrawTextureFitted(new Rect(mousePosition.x + 12f, num, 32f, 32f), Resources.PlanToolRemoveAll, iconDrawScale);
             }
