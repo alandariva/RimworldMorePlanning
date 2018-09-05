@@ -29,6 +29,7 @@ Features:
 ## Contributors
 - 53N4 - Spanish translation
 - Dango998 - Chinese Simplified translation
+- alextd - Option to reverse shift key usage
 
 ## Building
 
