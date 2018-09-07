@@ -1,30 +1,26 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using HugsLib;
 using HugsLib.Settings;
 using HugsLib.Utils;
 using MorePlanning.Designators;
+using MorePlanning.Legacy;
 using MorePlanning.Plan;
+using MorePlanning.Settings;
 using UnityEngine;
 using Verse;
+using ModSettings = MorePlanning.Settings.ModSettings;
 using Resources = MorePlanning.Common.Resources;
 
 namespace MorePlanning
 {
 
-    public class MorePlanningMod : ModBase
+    internal partial class MorePlanningMod : ModBase
     {
-        private MorePlanningMod()
-        {
-            _instance = this;
-        }
-
         private static MorePlanningMod _instance;
-        public static MorePlanningMod Instance
-        {
-            get { return _instance ?? (_instance = new MorePlanningMod()); }
-        }
+        public static MorePlanningMod Instance => _instance ?? (_instance = new MorePlanningMod());
 
         public const string Identifier = "com.github.alandariva.moreplanning";
 
@@ -32,24 +28,9 @@ namespace MorePlanning
 
         private static List<PlanDesignationDef> _planDesDefs = new List<PlanDesignationDef>();
 
-        private PlanningDataStore _dataStore;
+        public WorldSettings WorldSettings;
 
-        private SettingHandle<bool> _removeIfBuildingDespawned;
-
-        private SettingHandle<bool> _shiftKeyForOverride;
-
-        private SettingHandle<int> _planOpacity;
-        public int PlanOpacity
-        {
-            get => _planOpacity.Value;
-            set
-            {
-                _planOpacity.Value = value;
-                HugsLibController.SettingsManager.SaveChanges();
-            }
-        }
-
-        public float DefaultPlanOpacity => _planOpacity.DefaultValue;
+        public ModSettings ModSettings;
 
         public static List<PlanDesignationDef> PlanDesDefs
         {
@@ -69,18 +50,19 @@ namespace MorePlanning
         {
             get
             {
-                return (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) ==
-            MorePlanningMod.Instance._shiftKeyForOverride;
+                return (Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift)) == ModSettings.ShiftKeyForOverride;
             }
+        }
+
+        private MorePlanningMod()
+        {
+            _instance = this;
         }
 
         public override void DefsLoaded()
         {
             LoadPlanDesDefs();
-            _removeIfBuildingDespawned = Settings.GetHandle("removeIfBuildingDespawned", "MorePlanning.SettingRemoveIfBuildingDespawned.label".Translate(), "MorePlanning.SettingRemoveIfBuildingDespawned.desc".Translate(), false);
-            _shiftKeyForOverride = Settings.GetHandle("shiftKeyForOverride", "MorePlanning.SettingShiftKeyForOverride.label".Translate(), "MorePlanning.SettingShiftKeyForOverride.desc".Translate(), false);
-            _planOpacity = Settings.GetHandle("opacity", "MorePlanning.SettingPlanOpacity.label".Translate(), "MorePlanning.SettingPlanOpacity.desc".Translate(), 25);
-            _planOpacity.NeverVisible = true;
+            ModSettings = ModSettings.CreateModSettings(Settings);
             PlanColorManager.Load(Settings);
 
             SettingsChanged();
@@ -109,7 +91,7 @@ namespace MorePlanning
             var planningDefs = DefDatabase<PlanDesignationDef>.AllDefs;
             foreach (var planningDef in planningDefs)
             {
-                planningDef.removeIfBuildingDespawned = _removeIfBuildingDespawned;
+                planningDef.removeIfBuildingDespawned = this.ModSettings.RemoveIfBuildingDespawned;
             }
         }
 
@@ -124,52 +106,28 @@ namespace MorePlanning
             foreach (var mat in Resources.PlanMatColor)
             {
                 Color color = mat.color;
-                color.a = _planOpacity / 100f;
+                color.a = ModSettings.PlanOpacity / 100f;
                 mat.color = color;
             }
         }
 
         public override void WorldLoaded()
         {
-            _dataStore = UtilityWorldObjectManager.GetUtilityWorldObject<PlanningDataStore>();
-            VisibilityDesignator.PlanningVisibility = _dataStore.PlanningVisibility;
-            OpacityDesignator.Opacity = PlanOpacity;
+            WorldSettings = UtilityWorldObjectManager.GetUtilityWorldObject<WorldSettings>();
+            
+            // Fix compatibilities with older saves
+            UpdateLegacy.Update();
+
+            VisibilityDesignator.PlanningVisibility = WorldSettings.PlanningVisibility;
+            OpacityDesignator.Opacity = ModSettings.PlanOpacity;
         }
 
         private static void LoadPlanDesDefs()
         {
             _planDesDefs.Clear();
             _planDesDefs.AddRange(DefDatabase<PlanDesignationDef>.AllDefsListForReading);
-        }
 
-        public void SetPlanningVisibility(bool value)
-        {
-            if (_dataStore != null)
-            {
-                _dataStore.PlanningVisibility = value;
-            }
-        }
-
-        public override void MapLoaded(Map map)
-        {
-            
-        }
-
-        private class PlanningDataStore : UtilityWorldObject
-        {
-            public bool PlanningVisibility;
-
-            public override void PostAdd()
-            {
-                base.PostAdd();
-                PlanningVisibility = true;
-            }
-
-            public override void ExposeData()
-            {
-                base.ExposeData();
-                Scribe_Values.Look(ref PlanningVisibility, "planningVisibility", true);
-            }
+            Resources.PlanDesignationDef = DefDatabase<PlanDesignationDef>.GetNamed("Plan");
         }
 
     }

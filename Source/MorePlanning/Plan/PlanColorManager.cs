@@ -35,6 +35,7 @@ namespace MorePlanning.Plan
             for (int i = 0; i < NumPlans; i++)
             {
                 _planColorSetting[i] = settings.GetHandle("planColor" + i, "planColor" + i, "planColor" + i, GetDefaultColor(i));
+                _planColorSetting[i].NeverVisible = true;
             }
 
             for (int i = 0; i < NumPlans; i++)
@@ -55,7 +56,7 @@ namespace MorePlanning.Plan
 
             PlanColor[numColor] = color;
 
-            color.a = MorePlanningMod.Instance.PlanOpacity / 100f;
+            color.a = MorePlanningMod.Instance.ModSettings.PlanOpacity / 100f;
             Resources.PlanMatColor[numColor].SetColor("_Color", color);
         }
     }

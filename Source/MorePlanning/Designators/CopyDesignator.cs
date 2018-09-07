@@ -16,10 +16,9 @@ namespace MorePlanning.Designators
 
         public override bool DragDrawMeasurements => true;
 
-        public CopyDesignator()
+        public CopyDesignator() : 
+            base("MorePlanning.PlanCopy".Translate(), "MorePlanning.PlanCopyDesc".Translate())
         {
-            defaultLabel = "MorePlanning.PlanCopy".Translate();
-            defaultDesc = "MorePlanning.PlanCopyDesc".Translate();
             icon = ContentFinder<Texture2D>.Get("UI/PlanCopy");
         }
 

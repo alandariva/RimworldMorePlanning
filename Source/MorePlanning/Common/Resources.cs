@@ -25,6 +25,8 @@ namespace MorePlanning.Common
 
         public static Material[] PlanMatColor = new Material[PlanColorManager.NumPlans];
 
+        public static PlanDesignationDef PlanDesignationDef;
+
         static Resources()
         {
             for (int i = 0; i < PlanMatColor.Length; i++)

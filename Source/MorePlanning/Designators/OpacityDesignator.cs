@@ -6,7 +6,7 @@ using Verse;
 
 namespace MorePlanning.Designators
 {
-    public class OpacityDesignator : Designator
+    public class OpacityDesignator : BaseDesignator
     {
         private static int _opacity;
 
@@ -17,14 +17,13 @@ namespace MorePlanning.Designators
             {
                 _opacity = value;
                 UpdateLabel();
-                MorePlanningMod.Instance.PlanOpacity = _opacity;
+                MorePlanningMod.Instance.ModSettings.PlanOpacity = _opacity;
             }
         }
 
-        public OpacityDesignator()
+        public OpacityDesignator() : 
+            base("MorePlanning.Opacity.label".Translate(0), "MorePlanning.Opacity.desc".Translate())
         {
-            defaultLabel = "MorePlanning.Opacity.label".Translate(0);
-            defaultDesc = "MorePlanning.Opacity.desc".Translate();
             icon = ContentFinder<Texture2D>.Get("UI/Opacity");
         }
 
@@ -47,14 +46,14 @@ namespace MorePlanning.Designators
             foreach (var value in opacityOptions)
             {
                 string label = value + "%";
-                if (Math.Abs(value - MorePlanningMod.Instance.DefaultPlanOpacity) < 1)
+                if (value == MorePlanningMod.Instance.ModSettings.DefaultPlanOpacity)
                 {
                     label += " " + "MorePlanning.DefaultOpacity".Translate();
                 }
 
                 var value1 = value;
                 options.Add(new FloatMenuOption(label, delegate {
-                    MorePlanningMod.Instance.PlanOpacity = value1;
+                    MorePlanningMod.Instance.ModSettings.PlanOpacity = value1;
                     defaultLabel = "MorePlanning.Opacity.label".Translate(value1);
                 }));
             }

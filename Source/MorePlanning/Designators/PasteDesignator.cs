@@ -16,10 +16,9 @@ namespace MorePlanning.Designators
 
         public override bool DragDrawMeasurements => false;
 
-        public PasteDesignator()
+        public PasteDesignator() : 
+            base("MorePlanning.PlanPaste".Translate(), "MorePlanning.PlanPasteDesc".Translate())
         {
-            defaultLabel = "MorePlanning.PlanPaste".Translate();
-            defaultDesc = "MorePlanning.PlanPasteDesc".Translate();
             icon = ContentFinder<Texture2D>.Get("UI/PlanPaste");
         }
 

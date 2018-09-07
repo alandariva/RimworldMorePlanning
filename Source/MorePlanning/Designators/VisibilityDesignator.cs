@@ -7,7 +7,7 @@ using Resources = MorePlanning.Common.Resources;
 
 namespace MorePlanning.Designators
 {
-    public class VisibilityDesignator : Designator
+    public class VisibilityDesignator : BaseDesignator
     {
         private static bool _planningVisibility = true;
 
@@ -18,14 +18,12 @@ namespace MorePlanning.Designators
             {
                 _planningVisibility = value;
                 UpdateIconTool();
-                MorePlanningMod.Instance.SetPlanningVisibility(value);
+                MorePlanningMod.Instance.WorldSettings.PlanningVisibility = value;
             }
         }
 
-        public VisibilityDesignator()
+        public VisibilityDesignator() : base("MorePlanning.PlanVisibility".Translate(), "MorePlanning.PlanVisibilityDesc".Translate())
         {
-            defaultLabel = "MorePlanning.PlanVisibility".Translate();
-            defaultDesc = "MorePlanning.PlanVisibilityDesc".Translate();
             soundSucceeded = SoundDefOf.Designate_PlanAdd;
             hotKey = KeyBindingDefOf.Misc12;
         }

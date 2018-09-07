@@ -10,11 +10,8 @@ namespace MorePlanning.Designators
     public class RemoveDesignator : PlanBaseDesignator
     {
 
-        public RemoveDesignator()
+        public RemoveDesignator() : base("DesignatorPlanRemove".Translate(), "DesignatorPlanRemoveDesc".Translate())
         {
-            defaultLabel = "DesignatorPlanRemove".Translate();
-            defaultDesc = "DesignatorPlanRemoveDesc".Translate();
-
             soundSucceeded = SoundDefOf.Designate_PlanRemove;
             hotKey = KeyBindingDefOf.Designator_Deconstruct;
         }
@@ -55,7 +52,7 @@ namespace MorePlanning.Designators
             }
         }
 
-        protected override void CustomGizmoOnGui(Vector2 topLeft, Rect rect)
+        protected override void DrawToolbarIcon(Rect rect)
         {
             Rect position = new Rect(0f, 0f, iconProportions.x, iconProportions.y);
             float num;

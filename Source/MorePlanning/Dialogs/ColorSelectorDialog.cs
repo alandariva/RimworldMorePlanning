@@ -53,9 +53,9 @@ namespace MorePlanning.Dialogs
 
         public override void DoWindowContents(Rect inRect)
         {
-            Color beforeColor = Color.Color;
+            var beforeColor = Color.Color;
 
-            Rect colorSb = new Rect(0, 0, 10, 10)
+            var colorSb = new Rect(0, 0, 10, 10)
             {
                 center = new Vector2(256 * S, 256 - 256 * V)
             };
@@ -71,14 +71,14 @@ namespace MorePlanning.Dialogs
 
             GUI.DrawTexture(new Rect(275, 0, 19, 256), Resources.HsvSlider);
 
-            float newSlider = GUI.VerticalSlider(new Rect(264f, 0f, 11, 256f), Slider, 1, 0);
+            var newSlider = GUI.VerticalSlider(new Rect(264f, 0f, 11, 256f), Slider, 1, 0);
 
             Widgets.DrawBoxSolid(new Rect(305, 0, 76, 76), Color.Color);
 
-            string textHex = Widgets.TextField(new Rect(305f, 91f, 76f, 23f), InputColorHex);
+            var textHex = Widgets.TextField(new Rect(305f, 91f, 76f, 23f), InputColorHex);
 
-            bool defaultColorClicked = Widgets.ButtonText(new Rect(305f, 128f, 76f, 50f), "MorePlanning.DefaultColor".Translate());
-            bool okClicked = Widgets.ButtonText(new Rect(305f, 234f, 76f, 23f), "MorePlanning.Ok".Translate());
+            var defaultColorClicked = Widgets.ButtonText(new Rect(305f, 128f, 76f, 50f), "MorePlanning.DefaultColor".Translate());
+            var okClicked = Widgets.ButtonText(new Rect(305f, 234f, 76f, 23f), "MorePlanning.Ok".Translate());
 
             if (Math.Abs(newSlider - Slider) > 0.01)
             {
@@ -86,7 +86,7 @@ namespace MorePlanning.Dialogs
                 Slider = newSlider;
             }
 
-            bool colorHexChanged = false;
+            var colorHexChanged = false;
             if (textHex != InputColorHex)
             {
                 Color.HexColor = "#" + textHex;

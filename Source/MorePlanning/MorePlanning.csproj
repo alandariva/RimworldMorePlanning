@@ -66,9 +66,12 @@
     <Compile Include="Designators\PasteDesignator.cs" />
     <Compile Include="Designators\RemoveDesignator.cs" />
     <Compile Include="Dialogs\ColorSelectorDialog.cs" />
-    <Compile Include="Common\HarmonyPatches.cs" />
+    <Compile Include="Legacy\UpdateLegacy.cs" />
     <Compile Include="MorePlanningMod.cs" />
     <Compile Include="Common\AdaptableColor.cs" />
+    <Compile Include="Patches\DesignationPlanningDraw.cs" />
+    <Compile Include="Patches\DesignationPlanningExposeData.cs" />
+    <Compile Include="Patches\HarmonyPatches.cs" />
     <Compile Include="Plan\PlanDesignation.cs" />
     <Compile Include="Plan\PlanColorManager.cs" />
     <Compile Include="Plan\PlanInfo.cs" />
@@ -76,6 +79,8 @@
     <Compile Include="Plan\PlanDesignationDef.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Common\Resources.cs" />
+    <Compile Include="Settings\ModSettings.cs" />
+    <Compile Include="Settings\WorldSettings.cs" />
     <Compile Include="Utility\MenuUtility.cs" />
     <Compile Include="Utility\MapUtility.cs" />
   </ItemGroup>
