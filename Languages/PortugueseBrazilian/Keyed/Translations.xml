@@ -4,7 +4,10 @@
     <MorePlanning.SettingRemoveIfBuildingDespawned.label>Remover plano após construir</MorePlanning.SettingRemoveIfBuildingDespawned.label>
     <MorePlanning.SettingRemoveIfBuildingDespawned.desc>Se deve ser removido os desenhos de planejamento quando algo é construido ou desconstruido em cima dele.</MorePlanning.SettingRemoveIfBuildingDespawned.desc>
 
-    <MorePlanning.PlanDesc>Coloca desenhos de planejamento. Estes não tem efeito, apenas ajudam a planejar futuras expansões. Segure a tecla [shift] para sobrepor os outros planos.</MorePlanning.PlanDesc>
+    <MorePlanning.SettingShiftKeyForOverride.label>Shift substitui cores</MorePlanning.SettingShiftKeyForOverride.label>
+    <MorePlanning.SettingShiftKeyForOverride.desc>Adicionar ou remover planos substitui todas as cores por padrão. Pressionando [shift] as outras cores são ignoradas. Marque esta opção para reverter este comportamento.</MorePlanning.SettingShiftKeyForOverride.desc>
+
+    <MorePlanning.PlanDesc>Coloca desenhos de planejamento. Estes não tem efeito, apenas ajudam a planejar futuras expansões. Segure a tecla [shift] para alterar a substituição das cores.</MorePlanning.PlanDesc>
 
     <MorePlanning.PlanVisibility>Visibilidade dos Planos</MorePlanning.PlanVisibility>
     <MorePlanning.PlanVisibilityDesc>Altera a visibilidade dos planos.</MorePlanning.PlanVisibilityDesc>

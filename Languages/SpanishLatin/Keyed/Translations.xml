@@ -4,7 +4,7 @@
 	<MorePlanning.SettingRemoveIfBuildingDespawned.label>Eliminar el plano después de la construcción</MorePlanning.SettingRemoveIfBuildingDespawned.label>
 	<MorePlanning.SettingRemoveIfBuildingDespawned.desc>Cambia si los planos se deben eliminar cuando se construye o se deconstruye encima de ellos.</MorePlanning.SettingRemoveIfBuildingDespawned.desc>
 
-	<MorePlanning.PlanDesc>Coloca planos. Estos no hacen nada más que ayudar a planear futuras expansiones. Mantenga pulsada la tecla [shift] para sobrescribir otros planos.</MorePlanning.PlanDesc>
+	<MorePlanning.PlanDesc>Coloca planos. Estos no hacen nada más que ayudar a planear futuras expansiones. Mantenga pulsada la tecla [shift] para cambiar la opción de sustitución de los planos.</MorePlanning.PlanDesc>
 
 	<MorePlanning.PlanVisibility>Visibilidad de los planos</MorePlanning.PlanVisibility>
 	<MorePlanning.PlanVisibilityDesc>Cambia la visibilidad de los planos.</MorePlanning.PlanVisibilityDesc>
