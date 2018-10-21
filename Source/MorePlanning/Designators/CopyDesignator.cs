@@ -42,7 +42,7 @@ namespace MorePlanning.Designators
 
         public override void DesignateMultiCell(IEnumerable<IntVec3> cells)
         {
-            var planDesignations = cells.Select(cell => MapUtility.GetPlanDesignationAt(cell, Map)).Where(cell => cell != null).ToList();
+            var planDesignations = cells.Select(cell => MapUtility.GetPlanDesignationAt(cell, Map)).Where(designation => designation != null).ToList();
             cells = planDesignations.Select(plan => plan.target.Cell);
 
             if (planDesignations.Count == 0)
@@ -85,9 +85,11 @@ namespace MorePlanning.Designators
             // Copy all data from designations
             foreach (var planDesignation in planDesignations)
             {
+                var moddedPlanDesignation = planDesignation as PlanDesignation;
+
                 var planInfo = new PlanInfo
                 {
-                    Color = planDesignation.Color,
+                    Color = moddedPlanDesignation != null ? moddedPlanDesignation.Color : 0,
                     Pos = new IntVec3(planDesignation.target.Cell.x - sizeCompX, planDesignation.target.Cell.y, planDesignation.target.Cell.z - sizeCompZ)
                 };
                 planDesignationInfo.Add(planInfo);

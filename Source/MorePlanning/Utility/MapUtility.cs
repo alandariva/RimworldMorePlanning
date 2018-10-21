@@ -17,14 +17,14 @@ namespace MorePlanning.Utility
         /// <summary>
         /// Returns a plan designation if it exists at the position.
         /// </summary>
-        public static PlanDesignation GetPlanDesignationAt(IntVec3 c, Map map)
+        public static Designation GetPlanDesignationAt(IntVec3 c, Map map)
         {
             foreach (DesignationDef def in MorePlanningMod.PlanDesDefs)
             {
                 var des = map.designationManager.DesignationAt(c, def);
                 if (des != null)
                 {
-                    return des as PlanDesignation;
+                    return des;
                 }
             }
 
@@ -46,7 +46,8 @@ namespace MorePlanning.Utility
 
         public static bool HasPlanDesignationAt(IntVec3 c, Map map, int color)
         {
-            var designation = GetPlanDesignationAt(c, map);
+            var designation = GetPlanDesignationAt(c, map) as PlanDesignation;
+            
             if ((designation != null) && (designation.Color == color))
             {
                 return true;
