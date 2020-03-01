@@ -2,7 +2,9 @@
 <ModMetaData>
     <name>More Planning</name>
     <author>Alan Dariva</author>
-    <targetVersion>1.0.0</targetVersion>
+    <supportedVersions>
+        <li>1.1</li>
+    </supportedVersions>
     <url>https://ludeon.com/forums/index.php?topic=31045.0</url>
     <description>Version @@version
 
@@ -23,4 +25,5 @@
         - Dango998 - Chinese Simplified translation
         - alextd - Option to reverse shift key usage
     </description>
+	<packageId>com.github.alandariva.moreplanning</packageId>
 </ModMetaData>

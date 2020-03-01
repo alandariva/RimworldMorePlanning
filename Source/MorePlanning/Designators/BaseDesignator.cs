@@ -21,7 +21,7 @@ namespace MorePlanning.Designators
             useMouseIcon = true;
         }
 
-        protected virtual void DrawToolbarIcon(Rect rect)
+        protected virtual void DrawToolbarIcon( Rect rect)
         {
             Material material = (!disabled) ? null : TexUI.GrayscaleGUI;
 

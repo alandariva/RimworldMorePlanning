@@ -21,5 +21,6 @@ nbproject
 Source/MorePlanning/Library/*.dll
 
 Assemblies/MorePlanning.dll
+Assemblies/UnityEngine*
 
 node_modules

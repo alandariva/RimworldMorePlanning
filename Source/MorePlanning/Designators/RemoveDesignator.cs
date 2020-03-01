@@ -76,6 +76,5 @@ namespace MorePlanning.Designators
                 Widgets.DrawTextureFitted(new Rect(rect), Resources.RemoveIcon, iconDrawScale * 0.85f, iconProportions, iconTexCoords);
             }
         }
-
     }
 }

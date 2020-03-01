@@ -1,4 +1,4 @@
-﻿using Harmony;
+﻿using HarmonyLib;
 using MorePlanning.Designators;
 using MorePlanning.Plan;
 using UnityEngine;
@@ -28,7 +28,7 @@ namespace MorePlanning.Patches
                 return false;
             }
 
-            int colorId = 0;
+            int colorId = 1;
 
             if (__instance is PlanDesignation designation)
             {

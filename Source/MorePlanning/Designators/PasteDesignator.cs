@@ -57,7 +57,7 @@ namespace MorePlanning.Designators
                 Rect rect = new Rect(winRect.width / 2f - 64f - 5f, 15f, 64f, 64f);
                 if (Widgets.ButtonImage(rect, TexUI.RotLeftTex))
                 {
-                    SoundDefOf.AmountDecrement.PlayOneShotOnCamera();
+                    // SoundDefOf.AmountDecrement.PlayOneShotOnCamera();
                     rotationDirection = RotationDirection.Counterclockwise;
                     Event.current.Use();
                 }
@@ -65,7 +65,7 @@ namespace MorePlanning.Designators
                 Rect rect2 = new Rect(winRect.width / 2f + 5f, 15f, 64f, 64f);
                 if (Widgets.ButtonImage(rect2, TexUI.RotRightTex))
                 {
-                    SoundDefOf.AmountIncrement.PlayOneShotOnCamera();
+                    // SoundDefOf.AmountIncrement.PlayOneShotOnCamera();
                     rotationDirection = RotationDirection.Clockwise;
                     Event.current.Use();
                 }
@@ -104,12 +104,12 @@ namespace MorePlanning.Designators
             }
             if (rotationDirection == RotationDirection.Clockwise)
             {
-                SoundDefOf.AmountIncrement.PlayOneShotOnCamera();
+                // SoundDefOf.AmountIncrement.PlayOneShotOnCamera();
                 CurrentPlanCopy.Rotate(RotationDirection.Clockwise);
             }
             if (rotationDirection == RotationDirection.Counterclockwise)
             {
-                SoundDefOf.AmountDecrement.PlayOneShotOnCamera();
+                // SoundDefOf.AmountDecrement.PlayOneShotOnCamera();
                 CurrentPlanCopy.Rotate(RotationDirection.Counterclockwise);
             }
         }
