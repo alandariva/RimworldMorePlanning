@@ -14,7 +14,7 @@ Features:
 
 [More Planning - Steam Workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=881100382)
 
-![Alt Text](http://i66.tinypic.com/244uzx4.png)
+![Alt Text](https://raw.githubusercontent.com/alandariva/RimworldMorePlanning/master/doc/screen.png)
 
 ## Features
 - Blue, red, green and yellow planning designations;
