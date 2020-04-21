@@ -46,8 +46,12 @@ module.exports = (grunt) => {
         try {
             // Copy default dlls for modding from game folder
             fse.copySync('../../RimWorldWin64_Data/Managed/Assembly-CSharp.dll', 'Source/MorePlanning/Library/Assembly-CSharp.dll');
-            fse.copySync('../../RimWorldWin64_Data/Managed/UnityEngine.dll', 'Source/MorePlanning/Library/UnityEngine.dll');
-			fse.copySync('../../RimWorldWin64_Data/Managed/UnityEngine.CoreModule.dll', 'Source/MorePlanning/Library/UnityEngine.CoreModule.dll');
+            let unityEngineDll = glob.sync('../../RimWorldWin64_Data/Managed/UnityEngine*.dll');
+            for (let i = 0; i < unityEngineDll.length; i++) {
+                let splited = unityEngineDll[i].split('/');
+                let file = splited[splited.length - 1];
+                fse.copySync(unityEngineDll[i], 'Source/MorePlanning/Library/' + file);
+            }
 
             // Copy HugsLib.dll from workshop folder
             let filesFound = glob.sync('../../../../workshop/content/**/HugsLib.dll');
