@@ -16,8 +16,8 @@ namespace MorePlanning.Designators
 
         public override bool DragDrawMeasurements => false;
 
-        public PasteDesignator() : 
-            base("MorePlanning.PlanPaste".Translate(), "MorePlanning.PlanPasteDesc".Translate())
+        public PasteDesignator() :
+            base("MorePlanning.PlanPaste".Translate(), "MorePlanning.PlanPasteDesc".Translate(KeyBindingDefOf.Misc1.MainKeyLabel, KeyBindingDefOf.Misc2.MainKeyLabel))
         {
             icon = ContentFinder<Texture2D>.Get("UI/PlanPaste");
         }
@@ -25,6 +25,12 @@ namespace MorePlanning.Designators
         public override AcceptanceReport CanDesignateCell(IntVec3 c)
         {
             return true;
+        }
+
+        public override void Selected()
+        {
+            base.Selected();
+            this.defaultDesc = "MorePlanning.PlanPasteDesc".Translate(KeyBindingDefOf.Misc1.MainKeyLabel, KeyBindingDefOf.Misc2.MainKeyLabel);
         }
 
         public override void DesignateSingleCell(IntVec3 c)
@@ -111,6 +117,14 @@ namespace MorePlanning.Designators
             {
                 // SoundDefOf.AmountDecrement.PlayOneShotOnCamera();
                 CurrentPlanCopy.Rotate(RotationDirection.Counterclockwise);
+            }
+            if (KeyBindingDefOf.Misc1.KeyDownEvent)
+            {
+                CurrentPlanCopy.FlipHorizontally();
+            }
+            if (KeyBindingDefOf.Misc2.KeyDownEvent)
+            {
+                CurrentPlanCopy.FlipVertically();
             }
         }
 

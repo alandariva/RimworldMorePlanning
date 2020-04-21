@@ -26,7 +26,7 @@
     <MorePlanning.PlanCutDesc>Recorta os planos na área selecionada.</MorePlanning.PlanCutDesc>
 
     <MorePlanning.PlanPaste>Cola planos</MorePlanning.PlanPaste>
-    <MorePlanning.PlanPasteDesc>Cola os planos copiados ou recortados.</MorePlanning.PlanPasteDesc>
+    <MorePlanning.PlanPasteDesc>Cola os planos copiados ou recortados. Use a tecla Misc1 ({0}) para virar horizontalmente. Use a tecla Misc2 ({1}) para virar verticalmente.</MorePlanning.PlanPasteDesc>
 
     <MorePlanning.NoCutCopiedPlan>Nenhum desenhos de planejamento foram cortados ou copiados ainda.</MorePlanning.NoCutCopiedPlan>
 

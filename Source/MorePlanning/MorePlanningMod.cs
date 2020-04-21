@@ -86,6 +86,11 @@ namespace MorePlanning
             Instance.Logger.Error(text);
         }
 
+        public static void LogMessage(string text)
+        {
+            Instance.Logger.Message(text);
+        }
+
         private void UpdatePlanningDefsSetting()
         {
             var planningDefs = DefDatabase<PlanDesignationDef>.AllDefs;

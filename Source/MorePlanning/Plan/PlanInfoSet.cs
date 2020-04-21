@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using MorePlanning.Utility;
 using UnityEngine;
@@ -72,5 +73,44 @@ namespace MorePlanning.Plan
             }
         }
 
+        internal void FlipVertically()
+        {
+            int bottom = PlanDesignationInfo.Min(plan => plan.Pos.z);
+            int top = PlanDesignationInfo.Max(plan => plan.Pos.z);
+
+            float middle = (top + bottom) / 2;
+
+            foreach (var planDesInfo in PlanDesignationInfo)
+            {
+                if (planDesInfo.Pos.z < middle)
+                {
+                    planDesInfo.Pos.z = (int)(middle + (middle - planDesInfo.Pos.z));
+                }
+                else if (planDesInfo.Pos.z > middle)
+                {
+                    planDesInfo.Pos.z = (int)(middle - (planDesInfo.Pos.z - middle));
+                }
+            }
+        }
+
+        internal void FlipHorizontally()
+        {
+            int left = PlanDesignationInfo.Min(plan => plan.Pos.x);
+            int right = PlanDesignationInfo.Max(plan => plan.Pos.x);
+
+            float middle = (right + left) / 2;
+
+            foreach (var planDesInfo in PlanDesignationInfo)
+            {
+                if (planDesInfo.Pos.x < middle)
+                {
+                    planDesInfo.Pos.x = (int) (middle + (middle - planDesInfo.Pos.x));
+                }
+                else if (planDesInfo.Pos.x > middle)
+                {
+                    planDesInfo.Pos.x = (int)(middle - (planDesInfo.Pos.x - middle));
+                }
+            }
+        }
     }
 }

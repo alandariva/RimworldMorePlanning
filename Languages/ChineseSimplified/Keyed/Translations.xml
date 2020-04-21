@@ -23,7 +23,7 @@
     <MorePlanning.PlanCutDesc>剪切所选区域的计划。</MorePlanning.PlanCutDesc>
 
     <MorePlanning.PlanPaste>粘贴计划</MorePlanning.PlanPaste>
-    <MorePlanning.PlanPasteDesc>粘贴所选区域的计划。</MorePlanning.PlanPasteDesc>
+    <MorePlanning.PlanPasteDesc>粘贴所选区域的计划。 使用Misc1（{0}）键水平翻转。 使用Misc2（{1}）键垂直翻转。</MorePlanning.PlanPasteDesc>
 
     <MorePlanning.NoCutCopiedPlan>没有计划被剪切或复制。</MorePlanning.NoCutCopiedPlan>
 
