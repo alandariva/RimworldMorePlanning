@@ -1,6 +1,7 @@
 ﻿using HugsLib.Settings;
 using UnityEngine;
 using Resources = MorePlanning.Common.Resources;
+using Multiplayer.API;
 
 namespace MorePlanning.Plan
 {
@@ -44,6 +45,7 @@ namespace MorePlanning.Plan
             }
         }
 
+        [SyncMethod]
         public static void ChangeColor(int colorNum, string hexColor)
         {
             _planColorSetting[colorNum].Value = hexColor;
