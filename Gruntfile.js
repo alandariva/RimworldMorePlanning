@@ -75,7 +75,9 @@ module.exports = (grunt) => {
         
         let folders = [
             'About', 
-            'Assemblies',
+            '1.1',
+            '1.2',
+            'About',
             'Defs',
             'Languages',
             'Textures',

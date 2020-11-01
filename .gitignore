@@ -19,6 +19,7 @@ Desktop.ini
 nbproject
 
 Source/MorePlanning/Library/*.dll
+Source/MorePlanning/packages
 
 Assemblies/MorePlanning.dll
 Assemblies/UnityEngine*

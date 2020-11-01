@@ -31,6 +31,7 @@ Features:
 - Dango998 - Chinese Simplified translation
 - alextd - Option to reverse shift key usage
 - mike-ovch - Russian translation
+- Fuitad - French translation
 
 ## Building
 
