@@ -12,7 +12,9 @@ Features:
 
 [More Planning - RimWorld Forum Topic](https://ludeon.com/forums/index.php?topic=31045.0)
 
-[More Planning - Steam Workshop](http://steamcommunity.com/sharedfiles/filedetails/?id=881100382)
+[More Planning - Steam Workshop 1.1/1.2](http://steamcommunity.com/sharedfiles/filedetails/?id=881100382)
+
+[More Planning - Steam Workshop 1.3](https://steamcommunity.com/sharedfiles/filedetails/?id=2551225702)
 
 ![Alt Text](https://raw.githubusercontent.com/alandariva/RimworldMorePlanning/master/doc/screen.png)
 

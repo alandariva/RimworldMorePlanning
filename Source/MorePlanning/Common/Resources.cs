@@ -31,8 +31,7 @@ namespace MorePlanning.Common
         {
             for (int i = 0; i < PlanMatColor.Length; i++)
             {
-                Color c = new Color(0, 0, i);
-                PlanMatColor[i] = MaterialPool.MatFrom("UI/PlanBase" + i, ShaderDatabase.MetaOverlay, c);
+                PlanMatColor[i] = MaterialPool.MatFrom("UI/PlanBase" + i, ShaderDatabase.MetaOverlay, Color.white);
             }
         }
     }

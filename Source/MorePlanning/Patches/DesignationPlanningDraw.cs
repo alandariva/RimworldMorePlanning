@@ -36,7 +36,7 @@ namespace MorePlanning.Patches
             }
 
             Vector3 position = __instance.target.Cell.ToVector3ShiftedWithAltitude(__instance.DesignationDrawAltitude);
-            Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, Resources.PlanMatColor[colorId], 0);
+            Graphics.DrawMesh(MeshPool.plane10, position, Quaternion.identity, PlanColorManager.GetMaterial(colorId), 0);
 
             return false;
         }

@@ -76,7 +76,7 @@ namespace MorePlanning.Designators
             positionColor.x = rect.x + rect.width / 2f - positionColor.width / 2f;
             positionColor.y = rect.y + rect.height / 2f - positionColor.height / 2f;
 
-            Widgets.DrawBoxSolid(positionColor, PlanColorManager.PlanColor[Color]);
+            Widgets.DrawBoxSolid(positionColor,  PlanColorManager.GetColor(Color));
 
             Widgets.DrawTextureFitted(outerRect,
                 MorePlanningMod.Instance.SelectedColor == Color

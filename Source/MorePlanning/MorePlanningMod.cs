@@ -108,12 +108,7 @@ namespace MorePlanning
 
         private void UpdatePlanOpacity()
         {
-            foreach (var mat in Resources.PlanMatColor)
-            {
-                Color color = mat.color;
-                color.a = ModSettings.PlanOpacity / 100f;
-                mat.color = color;
-            }
+            PlanColorManager.InvalidateColors();
         }
 
         public override void WorldLoaded()
