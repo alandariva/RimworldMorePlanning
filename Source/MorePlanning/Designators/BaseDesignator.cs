@@ -43,11 +43,10 @@ namespace MorePlanning.Designators
             Widgets.DrawTextureFitted(outerRect, badTex, iconDrawScale * 0.85f, iconProportions, iconTexCoords, iconAngle, material);
         }
 
-        // copy paste from Command.GizmoOnGUI
-        public override GizmoResult GizmoOnGUI(Vector2 topLeft, float maxWidth)
+        protected override GizmoResult GizmoOnGUIInt(Rect rect, GizmoRenderParms parms)
         {
             Text.Font = GameFont.Tiny;
-            Rect rect = new Rect(topLeft.x, topLeft.y, GetWidth(maxWidth), 75f);
+            //Rect rect = new Rect(topLeft.x, topLeft.y, GetWidth(maxWidth), 75f);
             bool flag = false;
             if (Mouse.IsOver(rect))
             {

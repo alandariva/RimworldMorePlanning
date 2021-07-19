@@ -29,7 +29,7 @@ namespace MorePlanning.Dialogs
         public ColorSelectorDialog(int numColor)
         {
             NumColor = numColor;
-            Color = new AdaptableColor(PlanColorManager.PlanColor[numColor]);
+            Color = new AdaptableColor( PlanColorManager.GetColor(numColor));
 
             InputColorHex = Color.HexColor;
             Slider = Color.H;

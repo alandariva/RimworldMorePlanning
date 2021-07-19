@@ -47,7 +47,7 @@ namespace MorePlanning.Designators
             }
             else
             {
-                Graphics.DrawTexture(new Rect(mousePosition.x + 12f, num, 32f, 32f), Resources.Plan, iconTexCoords, 0, 1, 0, 1, PlanColorManager.PlanColor[MorePlanningMod.Instance.SelectedColor]);
+                Graphics.DrawTexture(new Rect(mousePosition.x + 12f, num, 32f, 32f), Resources.Plan, iconTexCoords, 0, 1, 0, 1, PlanColorManager.GetColor());
                 Widgets.DrawTextureFitted(new Rect(mousePosition.x + 12f, num, 32f, 32f), Resources.RemoveIcon, iconDrawScale);
             }
         }
@@ -72,7 +72,7 @@ namespace MorePlanning.Designators
 
             if (Event.current.type == EventType.Repaint)
             {
-                Graphics.DrawTexture(position, Resources.Plan, iconTexCoords, 0, 1, 0, 1, PlanColorManager.PlanColor[MorePlanningMod.Instance.SelectedColor]);
+                Graphics.DrawTexture(position, Resources.Plan, iconTexCoords, 0, 1, 0, 1,  PlanColorManager.GetColor());
                 Widgets.DrawTextureFitted(new Rect(rect), Resources.RemoveIcon, iconDrawScale * 0.85f, iconProportions, iconTexCoords);
             }
         }

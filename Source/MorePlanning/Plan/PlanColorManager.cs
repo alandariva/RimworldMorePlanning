@@ -2,14 +2,19 @@
 using UnityEngine;
 using Resources = MorePlanning.Common.Resources;
 using Multiplayer.API;
+using System.Text.RegularExpressions;
+using System.Globalization;
+using MorePlanning.Utility;
 
 namespace MorePlanning.Plan
 {
+
     public class PlanColorManager
     {
         public const int NumPlans = 10;
 
-        public static Color[] PlanColor = new Color[NumPlans];
+        private static Color[] PlanColor = new Color[NumPlans];
+        private static bool[] PlanColorChanged = new bool[NumPlans];
 
         private static SettingHandle<string>[] _planColorSetting = new SettingHandle<string>[NumPlans];
 
@@ -41,7 +46,7 @@ namespace MorePlanning.Plan
 
             for (int i = 0; i < NumPlans; i++)
             {
-                ColorChanged(i);
+                OnColorChanged(i);
             }
         }
 
@@ -49,17 +54,41 @@ namespace MorePlanning.Plan
         public static void ChangeColor(int colorNum, string hexColor)
         {
             _planColorSetting[colorNum].Value = hexColor;
-            ColorChanged(colorNum);
+            OnColorChanged(colorNum);
         }
 
-        private static void ColorChanged(int numColor)
+        private static void OnColorChanged(int numColor = -1)
         {
-            ColorUtility.TryParseHtmlString("#" + _planColorSetting[numColor], out var color);
-
-            PlanColor[numColor] = color;
-
-            color.a = MorePlanningMod.Instance.ModSettings.PlanOpacity / 100f;
-            Resources.PlanMatColor[numColor].SetColor("_Color", color);
+            PlanColor[numColor] = _planColorSetting[numColor].Value.HexToColor();
+            PlanColorChanged[numColor] = true;
         }
+
+        public static void InvalidateColors()
+        {
+            for (int i = 0; i < PlanColorChanged.Length; i++)
+            {
+                PlanColorChanged[i] = true;
+            }
+        }
+
+        public static Color GetColor(int col = -1)
+        {
+            if (col < 0)
+                col = MorePlanningMod.Instance.SelectedColor;
+            return PlanColor[col];
+        }
+
+        public static Material GetMaterial(int numColor)
+        {
+            if(PlanColorChanged[numColor])
+            {
+                PlanColorChanged[numColor] = false;
+                Color c = PlanColor[numColor];
+                c.a = MorePlanningMod.Instance.ModSettings.PlanOpacity / 100f;
+                Resources.PlanMatColor[numColor].SetColor("_Color", c);
+            }
+            return Resources.PlanMatColor[numColor];
+        }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using MorePlanning.Utility;
+using UnityEngine;
 
 namespace MorePlanning.Common
 {
@@ -32,7 +33,7 @@ namespace MorePlanning.Common
                 _b = value.b;
                 _a = value.a;
                 Color.RGBToHSV(Color, out _h, out _s, out _v);
-                _hexColor = ColorUtility.ToHtmlStringRGB(Color);
+                _hexColor = Color.ColorToHex();
             }
         }
 
@@ -42,13 +43,10 @@ namespace MorePlanning.Common
 
             set
             {
-                if (ColorUtility.TryParseHtmlString(value, out var color) == false)
-                {
+                if (!value.TryHexToColor(out var color))
                     return;
-                }
 
                 color.a = _a;
-
                 Color = color;
             }
         }
@@ -64,7 +62,7 @@ namespace MorePlanning.Common
                 _r = c.r;
                 _g = c.g;
                 _b = c.b;
-                _hexColor = ColorUtility.ToHtmlStringRGB(Color);
+                _hexColor = Color.ColorToHex();
             }
         }
 
@@ -79,7 +77,7 @@ namespace MorePlanning.Common
                 _r = c.r;
                 _g = c.g;
                 _b = c.b;
-                _hexColor = ColorUtility.ToHtmlStringRGB(Color);
+                _hexColor = Color.ColorToHex();
             }
         }
 
@@ -94,7 +92,7 @@ namespace MorePlanning.Common
                 _r = c.r;
                 _g = c.g;
                 _b = c.b;
-                _hexColor = ColorUtility.ToHtmlStringRGB(Color);
+                _hexColor = Color.ColorToHex();
             }
         }
     }
